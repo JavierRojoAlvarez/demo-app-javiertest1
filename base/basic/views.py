@@ -24,5 +24,5 @@ class ContactTemplateView(GeneralMixin, TemplateView):
 
 
 class AboutTemplateView(GeneralMixin, TemplateView):
-    template_name = 'basic/about.html'
+    template_name = 'basic/about-template/about-template.html'
     active_keys = ['about_template_active', 'info_active']
