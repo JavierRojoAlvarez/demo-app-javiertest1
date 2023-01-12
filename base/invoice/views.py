@@ -2,6 +2,7 @@ import simplejson as json
 from django.http import HttpResponse, Http404
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.core.exceptions import ObjectDoesNotExist
 from invoice.forms import IssuedInvoiceForm, ReceivedInvoiceForm
 from invoice.pdf import make_pdf_preview
 from my_app.models import (
@@ -49,7 +50,7 @@ class ReceivedInvoiceCreateView(CreateView):
         try:
             payment_id = self.kwargs['pk']
             return ContractPayment.objects.get(id=payment_id)
-        except Exception:
+        except (KeyError, ObjectDoesNotExist):
             return None
 
     def get_context_data(self, **kwargs):
