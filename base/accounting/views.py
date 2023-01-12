@@ -1,16 +1,10 @@
 import datetime
 from django.views.generic import TemplateView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q, F, When, Case, Sum
-from django.urls import reverse_lazy
 from my_app.models import Entry
-from basic.views import ActiveMixin
+from basic.views import ActiveMixin, LoginRequiredUrlMixin
 
 today = datetime.date.today().strftime("%d/%m/%Y")
-
-
-class LoginRequiredUrlMixin(LoginRequiredMixin):
-    login_url = reverse_lazy('login')
 
 
 class StatementsTemplateView(ActiveMixin, LoginRequiredUrlMixin, TemplateView):
