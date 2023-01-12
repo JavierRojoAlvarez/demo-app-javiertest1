@@ -284,30 +284,32 @@ class Contract(models.Model):
 
     @property
     def total_payments(self):
-        qs = self.contractpayment_set.all()
-        total_payments = qs.aggregate(Sum('amount'))['amount__sum']
+        queryset = self.contractpayment_set.all()
+        total_payments = queryset.aggregate(Sum('amount'))['amount__sum']
         return total_payments
 
     @property
     def total_interest(self):
-        qs = self.transaction_set.filter(transaction_type__name='Pay Interest')
-        total_interest = qs.aggregate(Sum('amount'))['amount__sum']
+        queryset = self.transaction_set.filter(
+            transaction_type__name='Pay Interest'
+        )
+        total_interest = queryset.aggregate(Sum('amount'))['amount__sum']
         return total_interest
 
     @property
     def start_date(self):
-        qs = self.transaction_set.order_by('date')
+        queryset = self.transaction_set.order_by('date')
         try:
-            start_date = qs.first().date
+            start_date = queryset.first().date
             return start_date
         except Exception:
             return
 
     @property
     def end_date(self):
-        qs = self.transaction_set.order_by('date')
+        queryset = self.transaction_set.order_by('date')
         try:
-            end_date = qs.last().date
+            end_date = queryset.last().date
             return end_date
         except Exception:
             return
