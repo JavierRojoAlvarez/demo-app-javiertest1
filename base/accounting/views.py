@@ -61,8 +61,8 @@ class StatementsTemplateView(ActiveMixin, LoginRequiredUrlMixin, TemplateView):
             if is_actual:
                 actual_kwarg = {'transaction__actual_expected': 'A'}
                 kwargs = {**kwargs, **actual_kwarg}
-            qs = Entry.objects.filter(**kwargs)
-            grand_total = sum((entry.signed_amount for entry in qs))
+            queryset = Entry.objects.filter(**kwargs)
+            grand_total = sum((entry.signed_amount for entry in queryset))
 
             def signed_amount():
                 lhs = ['Buildings Cost', 'Rent Expenditure', 'Bank Account']
@@ -93,12 +93,12 @@ class StatementsTemplateView(ActiveMixin, LoginRequiredUrlMixin, TemplateView):
                 )
                 output = Case(lhs_debit, lhs_credit, rhs_debit, rhs_credit)
                 return output
-            qs = (
-                qs.values('account__description')
+            queryset = (
+                queryset.values('account__description')
                 .annotate(subtotal=Sum(signed_amount()))
             )
-            qs.grand_total = grand_total
-            return qs
+            queryset.grand_total = grand_total
+            return queryset
         income_statement = [
             {
                 'title': 'Operating',
