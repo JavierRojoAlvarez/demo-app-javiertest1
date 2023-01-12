@@ -4,24 +4,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q, F, When, Case, Sum
 from django.urls import reverse_lazy
 from my_app.models import Entry
+from basic.views import ActiveMixin
 
 today = datetime.date.today().strftime("%d/%m/%Y")
 
 
 class LoginRequiredUrlMixin(LoginRequiredMixin):
     login_url = reverse_lazy('login')
-
-
-class ActiveMixin:
-    active_keys = None
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        active_keys = self.active_keys
-        if active_keys:
-            for key in active_keys:
-                context[key] = 'active'
-        return context
 
 
 class StatementsTemplateView(ActiveMixin, LoginRequiredUrlMixin, TemplateView):
