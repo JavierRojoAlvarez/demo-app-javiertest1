@@ -1,0 +1,35 @@
+# ignore virtual environment
+venv
+
+# ignore database and SQL
+*.sqlite3
+*.sql
+
+# ignore secrets JSON file
+secret*.json
+
+# ignore other directories
+inputs
+conversions
+outputs
+etc
+media
+
+# ignore pycache files
+__pycache__/
+*.pyc
+
+# ignore Excel workbooks
+*.xlsx
+*.xlsb
+*.xls
+
+# ignore CSV files
+*.csv
+
+# ignore PDF files
+*.pdf
+
+# ignore OS files
+Thumbs.db
+.DS_Store
