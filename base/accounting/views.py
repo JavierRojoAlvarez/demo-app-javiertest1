@@ -154,7 +154,7 @@ class StatementsTemplateView(ActiveMixin, LoginRequiredUrlMixin, TemplateView):
         valid_statements = ['pl', 'balance_sheet']
         try:
             statement_param = self.request.GET['statement']
-        except Exception:
+        except KeyError:
             active_statement = 'pl'
         else:
             if statement_param in valid_statements:
