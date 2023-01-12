@@ -2,7 +2,7 @@ import datetime
 from django.views.generic import TemplateView
 from django.db.models import Q, F, When, Case, Sum
 from my_app.models import Entry
-from basic.views import ActiveMixin, LoginRequiredUrlMixin
+from basic.mixins.views.general import ActiveMixin, LoginRequiredUrlMixin
 
 today = datetime.date.today().strftime("%d/%m/%Y")
 

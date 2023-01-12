@@ -18,7 +18,7 @@ from my_app.models import (
     Contract, ContractType, Region, Building, Transaction, TransactionType
 )
 from my_app.calculate import calculate
-from basic.views import ActiveMixin, LoginRequiredUrlMixin
+from basic.mixins.views.general import ActiveMixin, LoginRequiredUrlMixin
 
 today = datetime.date.today().strftime("%d/%m/%Y")
 

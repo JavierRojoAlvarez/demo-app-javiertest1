@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from basic.views import LoginRequiredUrlMixin
+from basic.mixins.views.general import LoginRequiredUrlMixin
 
 
 class TrackerTemplateView(LoginRequiredUrlMixin, TemplateView):
