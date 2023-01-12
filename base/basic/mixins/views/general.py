@@ -19,3 +19,7 @@ class ActiveMixin:
 
 class LoginRequiredUrlMixin(LoginRequiredMixin):
     login_url = reverse_lazy('login')
+
+
+class GeneralMixin(ActiveMixin, LoginRequiredUrlMixin):
+    pass

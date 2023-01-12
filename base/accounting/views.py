@@ -2,12 +2,12 @@ import datetime
 from django.views.generic import TemplateView
 from django.db.models import Q, F, When, Case, Sum
 from my_app.models import Entry
-from basic.mixins.views.general import ActiveMixin, LoginRequiredUrlMixin
+from basic.mixins.views.general import GeneralMixin
 
 today = datetime.date.today().strftime("%d/%m/%Y")
 
 
-class StatementsTemplateView(ActiveMixin, LoginRequiredUrlMixin, TemplateView):
+class StatementsTemplateView(GeneralMixin, TemplateView):
     template_name = 'accounting/statements.html'
     active_keys = ['accounting_active']
 

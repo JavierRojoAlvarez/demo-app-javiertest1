@@ -18,7 +18,7 @@ from my_app.models import (
     Contract, ContractType, Region, Building, Transaction, TransactionType
 )
 from my_app.calculate import calculate
-from basic.mixins.views.general import ActiveMixin, LoginRequiredUrlMixin
+from basic.mixins.views.general import GeneralMixin, LoginRequiredUrlMixin
 
 today = datetime.date.today().strftime("%d/%m/%Y")
 
@@ -204,9 +204,7 @@ class FormsetNewMixin:
         return context
 
 
-class TransactionCreateView(
-    ActiveMixin, FormsetMixin, LoginRequiredUrlMixin, CreateView
-):
+class TransactionCreateView(FormsetMixin, GeneralMixin, CreateView):
     model = Transaction
     template_name = 'my_app/transaction/transaction-create.html'
     success_url = reverse_lazy('transaction-list')
@@ -217,9 +215,7 @@ class TransactionCreateView(
     active_keys = ['transaction_active', 'transaction_create_active']
 
 
-class TransactionUpdateView(
-    ActiveMixin, FormsetNewMixin, LoginRequiredUrlMixin, UpdateView
-):
+class TransactionUpdateView(FormsetNewMixin, GeneralMixin, UpdateView):
     model = Transaction
     context_object_name = 'record'
     form_class = TransactionForm
@@ -295,7 +291,7 @@ def transaction_formset_view(request):
         )
 
 
-class TransactionListView(ActiveMixin, LoginRequiredUrlMixin, ListView):
+class TransactionListView(GeneralMixin, ListView):
     model = Transaction
     context_object_name = 'qs'
     active_keys = ['transaction_active', 'transaction_list_active']
@@ -322,7 +318,7 @@ class TransactionListView(ActiveMixin, LoginRequiredUrlMixin, ListView):
         return context
 
 
-class ContractListView(ActiveMixin, LoginRequiredUrlMixin, ListView):
+class ContractListView(GeneralMixin, ListView):
     model = Contract
     context_object_name = 'qs'
     active_keys = ['contract_active', 'contract_list_active']
@@ -341,9 +337,7 @@ class ContractListView(ActiveMixin, LoginRequiredUrlMixin, ListView):
         return context
 
 
-class ContractCreateNewView(
-    ActiveMixin, FormsetNewMixin, LoginRequiredUrlMixin, CreateView
-):
+class ContractCreateNewView(FormsetNewMixin, GeneralMixin, CreateView):
     model = Contract
     template_name = 'my_app/contract/contract-create.html'
     active_keys = ['contract_active', 'contract_create_active']
@@ -355,9 +349,7 @@ class ContractCreateNewView(
     formset_initial_data.extend(repeat({'date': today}, 4))
 
 
-class ContractUpdateView(
-    ActiveMixin, FormsetNewMixin, LoginRequiredUrlMixin, UpdateView
-):
+class ContractUpdateView(FormsetNewMixin, GeneralMixin, UpdateView):
     model = Contract
     template_name = 'my_app/contract/contract-update.html'
     active_keys = ['contract_active']
@@ -439,7 +431,7 @@ def contract_formset_view(request):
         )
 
 
-class ContractDetailView(ActiveMixin, LoginRequiredUrlMixin, DetailView):
+class ContractDetailView(GeneralMixin, DetailView):
     model = Contract
     context_object_name = 'record'
     template_name = 'my_app/contract/contract-detail.html'
@@ -450,7 +442,7 @@ class ContractDetailView(ActiveMixin, LoginRequiredUrlMixin, DetailView):
         return context
 
 
-class BuildingCreateView(ActiveMixin, LoginRequiredUrlMixin, CreateView):
+class BuildingCreateView(GeneralMixin, CreateView):
     model = Building
     form_class = BuildingForm
     template_name = 'my_app/building/building-create.html'
@@ -458,7 +450,7 @@ class BuildingCreateView(ActiveMixin, LoginRequiredUrlMixin, CreateView):
     success_url = reverse_lazy('building-list')
 
 
-class BuildingListView(ActiveMixin, LoginRequiredUrlMixin, ListView):
+class BuildingListView(GeneralMixin, ListView):
     model = Building
     context_object_name = 'qs'
     active_keys = ['asset_management_active', 'asset_management_list_active']
@@ -495,7 +487,7 @@ class BuildingListView(ActiveMixin, LoginRequiredUrlMixin, ListView):
         return qs
 
 
-class BuildingUpdateView(ActiveMixin, LoginRequiredUrlMixin, UpdateView):
+class BuildingUpdateView(GeneralMixin, UpdateView):
     model = Building
     context_object_name = 'record'
     form_class = BuildingForm
