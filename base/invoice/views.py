@@ -145,10 +145,7 @@ class ReceivedInvoiceCreateView(CreateView):
 
     def get_success_url(self):
         url = super().get_success_url()
-        try:
-            url = self.request.POST.get('next')
-        except Exception as exc:
-            print(exc)
+        url = self.request.POST.get('next')
         return url
 
     def get_template_names(self):
