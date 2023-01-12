@@ -19,7 +19,7 @@ class ServicesTemplateView(GeneralMixin, TemplateView):
 
 
 class ContactTemplateView(GeneralMixin, TemplateView):
-    template_name = 'basic/contact.html'
+    template_name = 'basic/contact-template/contact-template.html'
     active_keys = ['contact_template_active', 'info_active']
 
 
