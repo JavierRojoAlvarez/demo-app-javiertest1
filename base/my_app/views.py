@@ -474,17 +474,17 @@ class BuildingListView(GeneralMixin, ListView):
                        for k, v in query_dict.items() if k in filter_list}
         print('Query:'+str(query_dict))
         if query_dict:
-            qs = self.model.objects.filter(**filter_dict)
+            queryset = self.model.objects.filter(**filter_dict)
             if 'sort_direction' not in query_dict:
                 query_dict['sort_direction'] = ''
             try:
-                qs = qs.order_by(
+                queryset = queryset.order_by(
                     query_dict['sort_direction']+query_dict['sort_by'])
             except Exception:
                 pass
         else:
-            qs = self.model.objects.all()
-        return qs
+            queryset = self.model.objects.all()
+        return queryset
 
 
 class BuildingUpdateView(GeneralMixin, UpdateView):
