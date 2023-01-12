@@ -15,10 +15,12 @@ class Building(models.Model):
     epims_id = models.CharField('ePIMS ID', max_length=50)
     name = models.CharField('Name', max_length=50)
     region = models.ForeignKey(Region, on_delete=models.CASCADE, default='')
-    nia = models.DecimalField('NIA', decimal_places=2,
-                              max_digits=20, default=0)
-    ftes_capacity = models.DecimalField('FTEs Capacity', decimal_places=2,
-                                        max_digits=20, default=0)
+    nia = models.DecimalField(
+        'NIA', decimal_places=2, max_digits=20, default=0
+    )
+    ftes_capacity = models.DecimalField(
+        'FTEs Capacity', decimal_places=2, max_digits=20, default=0
+    )
     image = models.ImageField(default='images/default.png', upload_to='images')
     cost_centre = models.CharField('Cost Centre', max_length=50, default='')
 
@@ -40,9 +42,11 @@ class Cost(models.Model):
     start = models.DateField()
     end = models.DateField()
     cost_type = models.ForeignKey(
-        CostType, on_delete=models.CASCADE, default='')
+        CostType, on_delete=models.CASCADE, default=''
+    )
     building = models.ForeignKey(
-        Building, on_delete=models.CASCADE, default='')
+        Building, on_delete=models.CASCADE, default=''
+    )
     option = models.IntegerField()
     value = models.DecimalField(decimal_places=2, max_digits=20, default=0)
 
@@ -68,8 +72,9 @@ class Hierarchy1(models.Model):
 
 
 class Hierarchy2(models.Model):
-    hierarchy1 = models.ForeignKey(Hierarchy1, on_delete=models.CASCADE,
-                                   default='')
+    hierarchy1 = models.ForeignKey(
+        Hierarchy1, on_delete=models.CASCADE, default=''
+    )
     name = models.CharField(max_length=50, default='')
 
     def __str__(self):
@@ -77,8 +82,9 @@ class Hierarchy2(models.Model):
 
 
 class Hierarchy3(models.Model):
-    hierarchy2 = models.ForeignKey(Hierarchy2, on_delete=models.CASCADE,
-                                   default='')
+    hierarchy2 = models.ForeignKey(
+        Hierarchy2, on_delete=models.CASCADE, default=''
+    )
     name = models.CharField(max_length=50, default='')
 
     def __str__(self):
@@ -86,8 +92,9 @@ class Hierarchy3(models.Model):
 
 
 class Hierarchy4(models.Model):
-    hierarchy3 = models.ForeignKey(Hierarchy3, on_delete=models.CASCADE,
-                                   default='')
+    hierarchy3 = models.ForeignKey(
+        Hierarchy3, on_delete=models.CASCADE, default=''
+    )
     name = models.CharField(max_length=50, default='')
 
     def __str__(self):
@@ -145,9 +152,10 @@ class TransactionGroup(models.Model):
 
 class TransactionType(models.Model):
     name = models.CharField(max_length=50, default='')
-    group = models.ForeignKey(TransactionGroup, on_delete=models.CASCADE,
-                              default='', null=True, blank=True,
-                              verbose_name='Transaction Group')
+    group = models.ForeignKey(
+        TransactionGroup, on_delete=models.CASCADE, default='', null=True,
+        blank=True, verbose_name='Transaction Group'
+    )
 
     def __str__(self):
         return self.name
@@ -157,9 +165,10 @@ class TransactionType(models.Model):
 
 
 class PseudoEntry(AbstractEntry):
-    transaction_type = models.ForeignKey(TransactionType,
-                                         on_delete=models.CASCADE, default='',
-                                         verbose_name='Transaction Type')
+    transaction_type = models.ForeignKey(
+        TransactionType, on_delete=models.CASCADE, default='',
+        verbose_name='Transaction Type'
+    )
     amount = models.DecimalField(decimal_places=2, max_digits=20, default=0)
 
     def __str__(self):
@@ -182,9 +191,9 @@ class OrganisationType(models.Model):
 
 class Organisation(models.Model):
     name = models.CharField(max_length=50)
-    organisation_type = models.ForeignKey(OrganisationType,
-                                          on_delete=models.CASCADE, null=True,
-                                          blank=True)
+    organisation_type = models.ForeignKey(
+        OrganisationType, on_delete=models.CASCADE, null=True, blank=True
+    )
     reference = models.IntegerField()
     sort_code = models.IntegerField()
     account_number = models.IntegerField()
@@ -230,16 +239,20 @@ class Contract(models.Model):
     TREATMENT = (('Lessee', 'Lessee'), ('Lessor', 'Lessor'))
     description = models.CharField(max_length=50)
     revenue_expenditure = models.CharField(
-        'Revenue/Expenditure', max_length=50, choices=REVENUE_EXPENDITURE)
-    contract_type = models.ForeignKey(ContractType, on_delete=models.CASCADE,
-                                      null=True, blank=True,
-                                      verbose_name='Contract Type')
-    organisation = models.ForeignKey(Organisation, on_delete=models.CASCADE,
-                                     null=True, blank=True,
-                                     verbose_name='Counterparty')
+        'Revenue/Expenditure', max_length=50, choices=REVENUE_EXPENDITURE
+    )
+    contract_type = models.ForeignKey(
+        ContractType, on_delete=models.CASCADE, null=True, blank=True,
+        verbose_name='Contract Type'
+    )
+    organisation = models.ForeignKey(
+        Organisation, on_delete=models.CASCADE, null=True, blank=True,
+        verbose_name='Counterparty'
+    )
     building = models.ManyToManyField(Building, blank=True)
-    treatment = models.CharField('Treatment', max_length=50, null=True,
-                                 blank=True, choices=TREATMENT)
+    treatment = models.CharField(
+        'Treatment', max_length=50, null=True, blank=True, choices=TREATMENT
+    )
     start = models.DateField(null=True, blank=True)
     end = models.DateField(null=True, blank=True)
     signed = models.BooleanField(default=False)
@@ -264,7 +277,8 @@ class Contract(models.Model):
     @property
     def npv(self):
         record = self.transaction_set.get(
-            transaction_type__name='Recognise Lease')
+            transaction_type__name='Recognise Lease'
+        )
         npv = record.amount
         return npv
 
@@ -303,16 +317,19 @@ class Transaction(models.Model):
     TREATMENT = (('Accounting', 'Accounting'), ('Budgeting', 'Budgeting'))
     ACTUAL_EXPECTED = (('E', 'Expected'), ('A', 'Actual'))
     date = models.DateField()
-    transaction_type = models.ForeignKey(TransactionType,
-                                         on_delete=models.CASCADE, null=True,
-                                         blank=True,
-                                         verbose_name='Transaction Type')
-    comment = models.TextField(max_length=200, default='', null=True,
-                               blank=True)
-    contract = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True,
-                                 blank=True)
-    actual_expected = models.CharField('Actual/Expected', max_length=50,
-                                       choices=ACTUAL_EXPECTED, default='E')
+    transaction_type = models.ForeignKey(
+        TransactionType, on_delete=models.CASCADE, null=True, blank=True,
+        verbose_name='Transaction Type'
+    )
+    comment = models.TextField(
+        max_length=200, default='', null=True, blank=True
+    )
+    contract = models.ForeignKey(
+        Contract, on_delete=models.CASCADE, null=True, blank=True
+    )
+    actual_expected = models.CharField(
+        'Actual/Expected', max_length=50, choices=ACTUAL_EXPECTED, default='E'
+    )
     period = models.CharField(max_length=50, null=True, blank=True)
     amount = models.DecimalField(
         decimal_places=2, max_digits=20, default=0, null=True,
@@ -332,23 +349,28 @@ class ContractPayment(models.Model):
     TREATMENT = (('Accounting', 'Accounting'), ('Budgeting', 'Budgeting'))
     ACTUAL_EXPECTED = (('E', 'Expected'), ('A', 'Actual'))
     date = models.DateField(null=True, blank=True)
-    transaction_type = models.ForeignKey(TransactionType,
-                                         on_delete=models.CASCADE, null=True,
-                                         blank=True,
-                                         verbose_name='Transaction Type')
+    transaction_type = models.ForeignKey(
+        TransactionType, on_delete=models.CASCADE, null=True, blank=True,
+        verbose_name='Transaction Type'
+    )
     comment = models.TextField(
-        max_length=200, default='', null=True, blank=True)
-    contract = models.ForeignKey(Contract, on_delete=models.CASCADE, null=True,
-                                 blank=True)
-    actual_expected = models.CharField('Actual/Expected', max_length=50,
-                                       choices=ACTUAL_EXPECTED, default='E')
+        max_length=200, default='', null=True, blank=True
+    )
+    contract = models.ForeignKey(
+        Contract, on_delete=models.CASCADE, null=True, blank=True
+    )
+    actual_expected = models.CharField(
+        'Actual/Expected', max_length=50, choices=ACTUAL_EXPECTED, default='E'
+    )
     period = models.CharField(max_length=50, null=True, blank=True)
     amount = models.DecimalField(
         decimal_places=2, max_digits=20, default=0, null=True,
         validators=[MinValueValidator(Decimal('0.01'))]
     )
-    treatment = models.CharField('Treatment', max_length=50, choices=TREATMENT,
-                                 null=True, blank=True, default='')
+    treatment = models.CharField(
+        'Treatment', max_length=50, choices=TREATMENT, null=True, blank=True,
+        default=''
+    )
     time_index = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
@@ -356,18 +378,23 @@ class ContractPayment(models.Model):
 
 
 class Entry(AbstractEntry):
-    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE,
-                                    null=True, blank=True, default='')
-    contract = models.ForeignKey(Contract, on_delete=models.CASCADE,
-                                 null=True, blank=True, default='')
-    liability = models.DecimalField(decimal_places=2, max_digits=20, default=0,
-                                    null=True)
+    transaction = models.ForeignKey(
+        Transaction, on_delete=models.CASCADE, null=True, blank=True,
+        default=''
+    )
+    contract = models.ForeignKey(
+        Contract, on_delete=models.CASCADE, null=True, blank=True, default=''
+    )
+    liability = models.DecimalField(
+        decimal_places=2, max_digits=20, default=0, null=True
+    )
 
     @property
     def signed_amount(self):
         positive = ['Buildings Cost', 'Rent Expenditure', 'Bank Account']
-        negative = ['Deferred Expense (Lease)', 'Rent Recovery',
-                    'OB General Fund']
+        negative = [
+            'Deferred Expense (Lease)', 'Rent Recovery', 'OB General Fund'
+        ]
         if self.account.description in positive:
             account_sign = 1
         elif self.account.description in negative:
