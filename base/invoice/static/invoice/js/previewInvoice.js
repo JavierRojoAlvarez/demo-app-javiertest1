@@ -19,7 +19,7 @@ function getFormValues() {
 	return JSON.stringify(myObj);
 }
 
-function getPreview(addEntry, removeEntryIndex, amountDecimal, transactionTypeId) {
+function getPreview() {
 	console.log('%c getPreview() Initiated','background: cornflowerblue;\
 		color: white; padding: 2px; border-radius:2px');
 	fetch(endpoint, {
