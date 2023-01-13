@@ -1,7 +1,7 @@
 from django.urls import path
 from basic.views import (
     HomeTemplateView, ServicesTemplateView, ContactTemplateView,
-    AboutTemplateView, TestTemplateView
+    AboutTemplateView
 )
 
 
@@ -12,5 +12,4 @@ urlpatterns = [
     ),
     path('contact/', ContactTemplateView.as_view(), name='contact-template'),
     path('about/', AboutTemplateView.as_view(), name='about-template'),
-    path('test/', TestTemplateView.as_view(), name='test-template'),
 ]

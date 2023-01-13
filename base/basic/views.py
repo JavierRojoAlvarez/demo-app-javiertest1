@@ -1,16 +1,10 @@
 from django.views.generic import TemplateView
-from django.urls import reverse_lazy
 from basic.mixins.views.general import GeneralMixin
 
 
 class HomeTemplateView(GeneralMixin, TemplateView):
     template_name = 'basic/home.html'
     active_keys = ['home_template_active']
-
-
-class TestTemplateView(TemplateView):
-    template_name = 'basic/test.html'
-    login_url = reverse_lazy('login')
 
 
 class ServicesTemplateView(GeneralMixin, TemplateView):
