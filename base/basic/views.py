@@ -3,7 +3,7 @@ from basic.mixins.views.general import GeneralMixin
 
 
 class HomeTemplateView(GeneralMixin, TemplateView):
-    template_name = 'basic/home.html'
+    template_name = 'basic/home-template/home-template.html'
     active_keys = ['home_template_active']
 
 
