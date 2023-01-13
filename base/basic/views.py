@@ -14,7 +14,7 @@ class TestTemplateView(TemplateView):
 
 
 class ServicesTemplateView(GeneralMixin, TemplateView):
-    template_name = 'basic/services.html'
+    template_name = 'basic/services-template/services-template.html'
     active_keys = ['services_template_active']
 
 
