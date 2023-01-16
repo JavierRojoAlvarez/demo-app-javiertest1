@@ -39,7 +39,7 @@ function successfn(data) {
   console.log('Request successful!');
 };
 
-console.log('Request initiated to endpoint: ' + lineEndpoint);
+console.log(`Request initiated to endpoint: ${lineEndpoint}`);
 $.ajax({
   method: 'GET',
   url: lineEndpoint,
