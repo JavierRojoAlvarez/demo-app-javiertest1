@@ -1,3 +1,6 @@
+const $ = window.$;
+const moment = window.moment;
+const Chart = window.Chart;
 const lineEndpoint = '/api/line';
 
 function successfn(data) {
