@@ -59,7 +59,8 @@ def calculate(
     actuals.insert(0, initial_actual)
     try:
         year_list = sorted([date[0:4] for date in dates])
-    except Exception:
+    except TypeError:
+        # date may not be subscriptable as it maybe `datetime` object instead
         year_list = sorted([date.year for date in dates])
     time_periods = len(payments)
     time_index_list = [int(year)-base_year+1 for year in year_list]
