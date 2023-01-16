@@ -1,4 +1,3 @@
-const $ = window.$;
 const moment = window.moment;
 const Chart = window.Chart;
 const lineEndpoint = '/api/line';
@@ -43,14 +42,7 @@ function successfn(data) {
 };
 
 console.log(`Request initiated to endpoint: ${lineEndpoint}`);
-$.ajax({
-  method: 'GET',
-  url: lineEndpoint,
-  success: successfn,
-  error: function(errorData) {
-    console.log(errorData);
-  }
-});
+fetch(lineEndpoint).then(response => response.json()).then(successfn);
 
 const pieCtx = document.getElementById('myPie').getContext('2d');
 Chart(pieCtx, {
