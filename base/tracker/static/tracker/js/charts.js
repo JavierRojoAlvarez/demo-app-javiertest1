@@ -1,7 +1,7 @@
 const lineEndpoint = '/api/line';
 
 function successfn(data) {
-  data.labels = data.labels.map(dateString => new moment(dateString));
+  data.labels = data.labels.map(dateString => moment(dateString));
 
   const lineCtx = document.getElementById('myLine').getContext('2d');
   function userCallbackfn(value, index, values) {
