@@ -42,17 +42,19 @@ class FormsetMixin:
             self.object = None
             form = self.form_class(request.POST)
             formset = self.formset_class(request.POST)
-        if self.formset_class2:
+        try:
             formset2 = self.formset_class2(request.POST)
+        except AttributeError:
+            pass
+        else:
             if form.is_valid() and formset.is_valid() and formset2.is_valid():
                 return self.form_valid(form, formset, formset2=formset2)
             else:
                 return self.form_invalid(form, formset, formset2=formset2)
+        if form.is_valid() and formset.is_valid():
+            return self.form_valid(form, formset)
         else:
-            if form.is_valid() and formset.is_valid():
-                return self.form_valid(form, formset)
-            else:
-                return self.form_invalid(form, formset)
+            return self.form_invalid(form, formset)
 
     def form_valid(self, form, formset, formset2=None):
         if self.is_update_view:
@@ -97,9 +99,13 @@ class FormsetMixin:
                 formset = self.formset_class(initial=self.formset_initial_data)
                 formset.extra = len(self.formset_initial_data)
                 context['formset'] = formset
-                if self.formset_class2:
+                try:
                     formset2 = self.formset_class2(
-                        initial=self.formset2_initial_data)
+                        initial=self.formset2_initial_data
+                    )
+                except AttributeError:
+                    pass
+                else:
                     formset2.extra = len(self.formset2_initial_data)
                     context['formset2'] = formset2
         print('Context delivered is:\n', context)
