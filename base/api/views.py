@@ -17,7 +17,7 @@ class TrackerAPI(APIView):
     authentication_classes = []
     permission_classes = []
 
-    def get(self):
+    def get(self, request):
         data = tracker()
         return Response(data)
 
