@@ -30,7 +30,7 @@ function successfn(data) {
       yAxes
     }
   };
-  const lineChart = new Chart(
+  Chart(
     lineCtx,
     {type: 'line', data: dataObj, options: optionsObj}
   );
@@ -50,7 +50,7 @@ $.ajax({
 });
 
 const pieCtx = document.getElementById('myPie').getContext('2d');
-const pieChart = new Chart(pieCtx, {
+Chart(pieCtx, {
   type: 'pie',
   data: {
     labels: ['GPA', 'OGD', 'BBQ'],
