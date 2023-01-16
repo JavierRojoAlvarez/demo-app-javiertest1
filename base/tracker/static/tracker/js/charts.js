@@ -28,7 +28,7 @@ function successfn(responseObj) {
     }]
   };
   const options = {scales: {xAxes, yAxes}};
-  Chart(lineCtx, {type: 'line', data, options});
+  new Chart(lineCtx, {type: 'line', data, options});
   document.getElementById('spinner').style.display = 'none';
   document.getElementById('source').style.display = 'block';
   console.log('Request successful!');
@@ -38,7 +38,7 @@ console.log(`Request initiated to endpoint: ${lineEndpoint}`);
 fetch(lineEndpoint).then(response => response.json()).then(successfn);
 
 const pieCtx = document.getElementById('myPie').getContext('2d');
-Chart(pieCtx, {
+new Chart(pieCtx, {
   type: 'pie',
   data: {
     labels: ['GPA', 'OGD', 'BBQ'],
