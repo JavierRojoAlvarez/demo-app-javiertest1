@@ -1,6 +1,9 @@
 # ignore virtual environment
 venv
 
+# ignore node modules
+node_modules
+
 # ignore database and SQL
 *.sqlite3
 *.sql
