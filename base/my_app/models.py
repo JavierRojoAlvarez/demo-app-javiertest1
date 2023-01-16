@@ -51,7 +51,7 @@ class Cost(models.Model):
     value = models.DecimalField(decimal_places=2, max_digits=20, default=0)
 
     def __str__(self):
-        return str(self.cost_type) + ':' + str(self.start)
+        return f'{self.cost_type}:{self.start}'
 
 
 class AccountType(models.Model):
@@ -133,7 +133,7 @@ class AbstractEntry(models.Model):
     )
 
     def __str__(self):
-        return str(self.direction)+':'+str(self.account)+':'+str(self.amount)
+        return f'{self.direction}:{self.account}:{self.amount}'
 
     class Meta:
         abstract = True
@@ -173,8 +173,7 @@ class PseudoEntry(AbstractEntry):
 
     def __str__(self):
         string = (
-            str(self.transaction_type.name)
-            + ' / ' + str(self.direction) + ':' + str(self.account)
+            f'{self.transaction_type.name} / {self.direction}:{self.account}'
         )
         return string
 
@@ -218,7 +217,7 @@ class ProfitCentre(models.Model):
     name = models.IntegerField()
 
     def __str__(self):
-        return str(self.name)
+        return f'{self.name}'
 
     class Meta:
         verbose_name_plural = 'Profit Centres'
@@ -263,14 +262,13 @@ class Contract(models.Model):
     def __str__(self):
         if self.contract_type:
             string = (
-                self.contract_type.name+':'+self.description+' ['
-                + str(self.start_date)+' to '+str(self.end_date)+' ]'
+                f'{self.contract_type.name}:{self.description}'
+                f' [{self.start_date} to {self.end_date}]'
             )
             return string
         else:
             string = (
-                self.description+' ['+str(self.start_date)+' to '
-                + str(self.end_date)+' ]'
+                f'{self.description} [{self.start_date} to {self.end_date}]'
             )
         return string
 
@@ -344,7 +342,7 @@ class Transaction(models.Model):
     time_index = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
-        return str(self.transaction_type) + ':' + str(self.date)
+        return f'{self.transaction_type}:{self.date}'
 
 
 class ContractPayment(models.Model):
@@ -376,7 +374,7 @@ class ContractPayment(models.Model):
     time_index = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
-        return str(self.transaction_type) + ':' + str(self.date)
+        return f'{self.transaction_type}:{self.date}'
 
 
 class Entry(AbstractEntry):
