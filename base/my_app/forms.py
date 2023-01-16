@@ -9,10 +9,12 @@ from .models import (
 
 
 reg_attrs = {'class': 'form-control form-control-md rounded'}
-check_attrs = {'class': 'form-control form-control-sm',
-               'style': 'width: 1.5rem;'}
+check_attrs = {
+    'class': 'form-control form-control-sm', 'style': 'width: 1.5rem;'
+}
 date_attrs = {
-    'class': 'form-control form-control-md rounded date-input', 'name': 'date'}
+    'class': 'form-control form-control-md rounded date-input', 'name': 'date'
+}
 req_attrs = {'required': 'required'}
 
 
@@ -54,8 +56,10 @@ class EntryForm(ModelForm):
             'transaction': forms.Select(attrs={**reg_attrs, **req_attrs}),
             'account': forms.Select(attrs={**reg_attrs, **req_attrs}),
             'amount': forms.NumberInput(
-                attrs={'class': 'form-control form-control-md rounded amount',
-                       'required': 'required'}
+                attrs={
+                    'class': 'form-control form-control-md rounded amount',
+                    'required': 'required'
+                }
             ),
         }
         fields = list(widgets.keys())
@@ -101,7 +105,8 @@ class TransactionForm(ModelForm):
             'amount': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-md rounded amount',
-                    'placeholder': 'Amount'}
+                    'placeholder': 'Amount'
+                }
             ),
             'actual_expected': forms.Select(attrs=reg_attrs),
 
@@ -125,11 +130,14 @@ class ContractPaymentForm(ModelForm):
             'period': forms.TextInput(
                 attrs={
                     'class': 'form-control form-control-md rounded',
-                    'placeholder': 'Period'}
+                    'placeholder': 'Period'
+                }
             ),
             'amount': forms.NumberInput(
-                attrs={'class': 'form-control form-control-md rounded amount',
-                       'placeholder': 'Amount'}
+                attrs={
+                    'class': 'form-control form-control-md rounded amount',
+                    'placeholder': 'Amount'
+                }
             ),
             'actual_expected': forms.Select(attrs=reg_attrs)
         }
@@ -138,8 +146,10 @@ class ContractPaymentForm(ModelForm):
 
 class ContractForm(ModelForm):
     sort_by_fields = ['start', 'end', 'organisation']
-    filter_fields = ['revenue_expenditure', 'contract_type', 'organisation',
-                     'start', 'end', 'signed']
+    filter_fields = [
+        'revenue_expenditure', 'contract_type', 'organisation', 'start', 'end',
+        'signed'
+    ]
     filter_groups = [
         ['revenue_expenditure', 'contract_type'],
         ['organisation', 'signed'],
@@ -186,7 +196,8 @@ class BaseEntryFormset(BaseInlineFormSet):
                 form_kwargs['initial_data'] = nested_data[form_index]
             else:
                 form_kwargs['initial_data'] = [
-                    {'direction': 1}, {'direction': 2}]
+                    {'direction': 1}, {'direction': 2}
+                ]
         except Exception as exc:
             print(exc)
         return form_kwargs
@@ -200,7 +211,8 @@ class BaseEntryFormset(BaseInlineFormSet):
             files=form.files if form.is_bound else None,
             prefix='entry-%s-%s' % (
                 form.prefix,
-                EntryFormSet.get_default_prefix()),
+                EntryFormSet.get_default_prefix()
+            ),
         )
         nested.extra = 2
         form.nested = nested
