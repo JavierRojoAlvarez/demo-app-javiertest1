@@ -3,7 +3,6 @@ const Chart = window.Chart;
 const lineEndpoint = '/api/line';
 
 function successfn(responseObj) {
-  console.log(responseObj);
   responseObj.labels = responseObj.labels.map(dateString => moment(dateString));
 
   const lineCtx = document.getElementById('myLine').getContext('2d');
@@ -31,10 +30,8 @@ function successfn(responseObj) {
   new Chart(lineCtx, {type: 'line', data, options});
   document.getElementById('spinner').style.display = 'none';
   document.getElementById('source').style.display = 'block';
-  console.log('Request successful!');
 };
 
-console.log(`Request initiated to endpoint: ${lineEndpoint}`);
 fetch(lineEndpoint).then(response => response.json()).then(successfn);
 
 const pieCtx = document.getElementById('myPie').getContext('2d');
