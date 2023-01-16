@@ -14,6 +14,7 @@ conversions
 outputs
 etc
 media
+/base/static
 
 # ignore pycache files
 __pycache__/
