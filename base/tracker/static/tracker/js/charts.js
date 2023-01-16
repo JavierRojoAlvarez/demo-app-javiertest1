@@ -2,7 +2,7 @@ const moment = window.moment;
 const Chart = window.Chart;
 const lineEndpoint = '/api/line';
 
-function successfn(responseObj) {
+function buildLineChart(responseObj) {
   responseObj.labels = responseObj.labels.map(dateString => moment(dateString));
 
   const lineCtx = document.getElementById('myLine').getContext('2d');
@@ -32,7 +32,7 @@ function successfn(responseObj) {
   document.getElementById('source').style.display = 'block';
 };
 
-fetch(lineEndpoint).then(response => response.json()).then(successfn);
+fetch(lineEndpoint).then(response => response.json()).then(buildLineChart);
 
 const pieCtx = document.getElementById('myPie').getContext('2d');
 new Chart(pieCtx, {
