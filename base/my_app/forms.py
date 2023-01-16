@@ -209,10 +209,7 @@ class BaseEntryFormset(BaseInlineFormSet):
             instance=form.instance,
             initial=form.initial_data,
             files=form.files if form.is_bound else None,
-            prefix='entry-%s-%s' % (
-                form.prefix,
-                EntryFormSet.get_default_prefix()
-            ),
+            prefix=f'entry-{form.prefix}-{EntryFormSet.get_default_prefix()}',
         )
         nested.extra = 2
         form.nested = nested
