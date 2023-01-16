@@ -2,8 +2,9 @@ const moment = window.moment;
 const Chart = window.Chart;
 const lineEndpoint = '/api/line';
 
-function successfn(data) {
-  data.labels = data.labels.map(dateString => moment(dateString));
+function successfn(responseObj) {
+  console.log(responseObj);
+  responseObj.labels = responseObj.labels.map(dateString => moment(dateString));
 
   const lineCtx = document.getElementById('myLine').getContext('2d');
   function userCallbackfn(value, index, values) {
@@ -17,25 +18,17 @@ function successfn(data) {
     gridLines: {display: true},
     time: {minUnit: 'month'}
   }];
-  const dataObj = {
-    labels: data.labels,
+  const data = {
+    labels: responseObj.labels,
     datasets: [{
       label: 'UK Total Covid-19 Cases ',
       borderColor: 'rgb(255, 99, 132)',
       pointBackgroundColor: 'rgb(255, 99, 132)',
-      data: data.values
+      data: responseObj.values
     }]
   };
-  const optionsObj = {
-    scales: {
-      xAxes,
-      yAxes
-    }
-  };
-  Chart(
-    lineCtx,
-    {type: 'line', data: dataObj, options: optionsObj}
-  );
+  const options = {scales: {xAxes, yAxes}};
+  Chart(lineCtx, {type: 'line', data, options});
   document.getElementById('spinner').style.display = 'none';
   document.getElementById('source').style.display = 'block';
   console.log('Request successful!');
