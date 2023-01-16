@@ -16,6 +16,7 @@ module.exports = {
     'space-before-function-paren': 'off',
     'quote-props': ['error', 'consistent'],
     'space-infix-ops': 'off',
+    'no-new': 'off',
     'comma-dangle': ['error', 'only-multiline'],
   }
 };
