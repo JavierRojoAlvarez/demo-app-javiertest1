@@ -1,4 +1,4 @@
-{% extends "tracker/base/base.html"%}
+{% extends "basic/base/base.html"%}
 {% block content %}
 {% load static %}
 <div class='container'>
@@ -19,3 +19,6 @@
 	</div>
 </div>
 {% endblock %}
+{% block js %}
+	<script src='{% static 'tracker/js/charts.js' %}'></script>
+{% endblock js %}

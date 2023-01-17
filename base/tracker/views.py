@@ -3,4 +3,4 @@ from basic.mixins.views.general import LoginRequiredUrlMixin
 
 
 class TrackerTemplateView(LoginRequiredUrlMixin, TemplateView):
-    template_name = 'tracker/tracker.html'
+    template_name = 'tracker/tracker-template.html'
