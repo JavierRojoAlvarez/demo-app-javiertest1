@@ -1,30 +1,11 @@
 from django.urls import path
 from my_app.views import (
-     BuildingCreateView, BuildingListView, BuildingDetailView,
-     BuildingDeleteView, BuildingUpdateView, TransactionCreateView,
-     TransactionListView, TransactionUpdateView, ContractCreateNewView,
-     ContractListView, ContractUpdateView, ContractDetailView,
-     transaction_formset_view, contract_formset_view
+     TransactionCreateView, TransactionListView, TransactionUpdateView,
+     ContractCreateNewView, ContractListView, ContractUpdateView,
+     ContractDetailView, transaction_formset_view, contract_formset_view
 )
 
 urlpatterns = [
-    path(
-          'building/create/', BuildingCreateView.as_view(),
-          name='building-create'
-    ),
-    path('building/list/', BuildingListView.as_view(), name='building-list'),
-    path(
-          'building/detail/<int:pk>/', BuildingDetailView.as_view(),
-          name='building-detail'
-    ),
-    path(
-          'building/update/<int:pk>/', BuildingUpdateView.as_view(),
-          name='building-update'
-    ),
-    path(
-          'building/delete/<int:pk>/', BuildingDeleteView.as_view(),
-          name='building-delete'
-    ),
     path(
           'transaction/create', TransactionCreateView.as_view(),
           name='transaction-create'

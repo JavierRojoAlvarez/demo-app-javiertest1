@@ -3,9 +3,7 @@ from django.forms import ModelForm
 from django.forms import inlineformset_factory
 from django.forms.models import BaseInlineFormSet
 from website.settings import DATE_INPUT_FORMATS
-from .models import (
-    Building, Cost, Entry, Transaction, ContractPayment, Contract
-)
+from .models import Cost, Entry, Transaction, ContractPayment, Contract
 
 
 reg_attrs = {'class': 'form-control form-control-md rounded'}
@@ -16,20 +14,6 @@ date_attrs = {
     'class': 'form-control form-control-md rounded date-input', 'name': 'date'
 }
 req_attrs = {'required': 'required'}
-
-
-class BuildingForm(ModelForm):
-    class Meta:
-        model = Building
-        widgets = {
-            'epims_id': forms.TextInput(attrs=reg_attrs),
-            'name': forms.TextInput(attrs=reg_attrs),
-            'region': forms.Select(attrs=reg_attrs),
-            'nia': forms.NumberInput(attrs=reg_attrs),
-            'ftes_capacity': forms.NumberInput(attrs=reg_attrs),
-            'image': forms.FileInput(attrs={'class': 'form-control-file'})
-        }
-        fields = list(widgets.keys())
 
 
 class CostForm(ModelForm):
