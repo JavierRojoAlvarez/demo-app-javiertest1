@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'basic',
     'my_app',
     'users',
-    'tracker',
     'accounting',
     'invoice',
     'rest_framework',

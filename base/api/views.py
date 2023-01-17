@@ -7,7 +7,7 @@ from oauth2_provider.contrib.rest_framework import (
     TokenHasReadWriteScope, OAuth2Authentication
 )
 from django_pandas.io import read_frame
-from tracker.tracker import tracker
+from basic.tracker import tracker
 from my_app.ifrs16 import calculate
 from my_app.models import Contract, Cost
 from my_app.serializers import CostSerializer
