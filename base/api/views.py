@@ -13,7 +13,7 @@ from my_app.models import Contract, Cost
 from my_app.serializers import CostSerializer
 
 
-class TrackerAPI(APIView):
+class TrackerAPIView(APIView):
     authentication_classes = []
     permission_classes = []
 
@@ -22,7 +22,7 @@ class TrackerAPI(APIView):
         return Response(data)
 
 
-class Liability(APIView):
+class LiabilityAPIView(APIView):
     authentication_classes = []
     permission_classes = []
 
@@ -61,7 +61,7 @@ class Liability(APIView):
             raise APIException('Something went wrong') from exc
 
 
-class ExampleAPI(APIView):
+class ExampleAPIView(APIView):
     authentication_classes = [OAuth2Authentication]
     authentication_classes = []
     permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
