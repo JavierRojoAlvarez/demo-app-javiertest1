@@ -5,7 +5,7 @@ import pandas as pd
 pd.options.mode.chained_assignment = None
 
 
-def tracker():
+def get_tracker_data():
     url = "https://opendata.ecdc.europa.eu/covid19/casedistribution/json/"
     with urllib.request.urlopen(url) as url:
         data = json.loads(url.read().decode())
