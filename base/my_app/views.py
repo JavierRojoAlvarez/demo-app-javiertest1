@@ -15,8 +15,9 @@ from my_app.forms import (
 )
 from my_app.ifrs16 import create_records
 from my_app.models import (
-    Contract, ContractType, Region, Building, Transaction, TransactionType
+    Contract, ContractType, Transaction, TransactionType
 )
+from buildings.models import Region, Building
 from my_app.calculate import calculate
 from basic.mixins.views.general import GeneralMixin, LoginRequiredUrlMixin
 

@@ -2,7 +2,8 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 from django_pandas.io import read_frame
-from .models import Cost, Building
+from my_app.models import Cost
+from buildings.models import Building
 
 
 def calculate(

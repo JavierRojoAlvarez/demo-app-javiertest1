@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'basic',
     'my_app',
+    'buildings',
     'users',
     'accounting',
     'invoice',
