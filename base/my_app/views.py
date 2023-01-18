@@ -217,7 +217,7 @@ class FormsetNewMixin:
         return context
 
 
-class TransactionCreateView(FormsetMixin, GeneralMixin, CreateView):
+class TransactionCreateView(FormsetNewMixin, GeneralMixin, CreateView):
     model = Transaction
     template_name = 'my_app/transaction/transaction-create.html'
     success_url = reverse_lazy('transaction-list')
