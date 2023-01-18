@@ -173,12 +173,12 @@ class BaseEntryFormset(BaseInlineFormSet):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def get_form_kwargs(self, form_index):
-        form_kwargs = super().get_form_kwargs(form_index)
+    def get_form_kwargs(self, index):
+        form_kwargs = super().get_form_kwargs(index)
         try:
             nested_data = form_kwargs['nested_data']
-            if form_index < len(nested_data):
-                form_kwargs['initial_data'] = nested_data[form_index]
+            if index < len(nested_data):
+                form_kwargs['initial_data'] = nested_data[index]
             else:
                 form_kwargs['initial_data'] = [
                     {'direction': 1}, {'direction': 2}
