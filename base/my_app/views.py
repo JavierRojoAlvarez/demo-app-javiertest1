@@ -14,8 +14,8 @@ from my_app.forms import (
 )
 from my_app.ifrs16 import create_records
 from my_app.models import Contract, ContractType, Transaction, TransactionType
-from buildings.models import Region
 from my_app.calculate import calculate
+from buildings.models import Region
 from basic.mixins.views.general import GeneralMixin
 
 today = datetime.date.today().strftime("%d/%m/%Y")
