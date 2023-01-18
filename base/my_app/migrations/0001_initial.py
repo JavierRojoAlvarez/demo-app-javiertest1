@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
                 ('start', models.DateField(blank=True, null=True)),
                 ('end', models.DateField(blank=True, null=True)),
                 ('signed', models.BooleanField(default=False)),
-                ('building', models.ManyToManyField(blank=True, to='my_app.building')),
+                ('building', models.ManyToManyField(blank=True, to='buildings.building')),
             ],
             options={
                 'ordering': ('-id',),
@@ -245,7 +245,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='building',
             name='region',
-            field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='my_app.region'),
+            field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='buildings.region'),
         ),
         migrations.AddField(
             model_name='account',
@@ -277,11 +277,6 @@ class Migration(migrations.Migration):
             name='treatment',
             field=models.CharField(blank=True, choices=[('Lessee', 'Lessee'), ('Lessor', 'Lessor')], max_length=50, null=True, verbose_name='Treatment'),
         ),
-        migrations.AlterField(
-            model_name='contract',
-            name='building',
-            field=models.ManyToManyField(blank=True, to='buildings.building'),
-        ),
         migrations.CreateModel(
             name='Cost',
             fields=[
@@ -293,11 +288,5 @@ class Migration(migrations.Migration):
                 ('building', models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='buildings.building')),
                 ('cost_type', models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='my_app.costtype')),
             ],
-        ),
-        migrations.DeleteModel(
-            name='Building',
-        ),
-        migrations.DeleteModel(
-            name='Region',
         ),
     ]
