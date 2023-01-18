@@ -8,7 +8,6 @@ import invoice.validators
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('my_app', '0004_delete_invoice'),
         ('invoice', '0003_auto_20210407_1124'),
     ]
 
