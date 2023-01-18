@@ -8,7 +8,7 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    replaces = [('my_app', '0001_squash'), ('my_app', '0002_delete_unused_models')]
+    initial = True
 
     dependencies = [
     ]
