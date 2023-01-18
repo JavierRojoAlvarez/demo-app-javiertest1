@@ -3,7 +3,8 @@ from django.forms import ModelForm
 from django.forms import inlineformset_factory
 from django.forms.models import BaseInlineFormSet
 from website.settings import DATE_INPUT_FORMATS
-from .models import Cashflow, Entry, Transaction, ContractPayment, Contract
+from cashflows.models import Cashflow
+from .models import Entry, Transaction, ContractPayment, Contract
 
 
 reg_attrs = {'class': 'form-control form-control-md rounded'}

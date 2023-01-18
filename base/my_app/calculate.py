@@ -2,7 +2,7 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 from django_pandas.io import read_frame
-from my_app.models import Cashflow
+from cashflows.models import Cashflow
 from buildings.models import Building
 
 
