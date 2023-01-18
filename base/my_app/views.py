@@ -21,7 +21,7 @@ from basic.mixins.views.general import GeneralMixin
 today = datetime.date.today().strftime("%d/%m/%Y")
 
 
-class FormsetNewMixin:
+class FormsetMixin:
     # formset_class = None
     form_initial_data = None
     formset_initial_data = None
@@ -128,7 +128,7 @@ class FormsetNewMixin:
         return context
 
 
-class TransactionCreateView(FormsetNewMixin, GeneralMixin, CreateView):
+class TransactionCreateView(FormsetMixin, GeneralMixin, CreateView):
     model = Transaction
     template_name = 'my_app/transaction/transaction-create.html'
     success_url = reverse_lazy('transaction-list')
@@ -139,7 +139,7 @@ class TransactionCreateView(FormsetNewMixin, GeneralMixin, CreateView):
     active_keys = ['transaction_active', 'transaction_create_active']
 
 
-class TransactionUpdateView(FormsetNewMixin, GeneralMixin, UpdateView):
+class TransactionUpdateView(FormsetMixin, GeneralMixin, UpdateView):
     model = Transaction
     context_object_name = 'record'
     form_class = TransactionForm
@@ -261,7 +261,7 @@ class ContractListView(GeneralMixin, ListView):
         return context
 
 
-class ContractCreateNewView(FormsetNewMixin, GeneralMixin, CreateView):
+class ContractCreateNewView(FormsetMixin, GeneralMixin, CreateView):
     model = Contract
     template_name = 'my_app/contract/contract-create.html'
     active_keys = ['contract_active', 'contract_create_active']
@@ -273,7 +273,7 @@ class ContractCreateNewView(FormsetNewMixin, GeneralMixin, CreateView):
     formset_initial_data.extend(repeat({'date': today}, 4))
 
 
-class ContractUpdateView(FormsetNewMixin, GeneralMixin, UpdateView):
+class ContractUpdateView(FormsetMixin, GeneralMixin, UpdateView):
     model = Contract
     template_name = 'my_app/contract/contract-update.html'
     active_keys = ['contract_active']
