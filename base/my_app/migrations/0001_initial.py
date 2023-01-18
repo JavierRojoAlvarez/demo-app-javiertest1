@@ -8,8 +8,9 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
+    inital = True
+
     dependencies = [
-        ('buildings', '0003_copy_building_data'),
     ]
 
     operations = [
