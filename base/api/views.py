@@ -9,7 +9,7 @@ from oauth2_provider.contrib.rest_framework import (
 from django_pandas.io import read_frame
 from basic.tracker import get_tracker_data
 from my_app.ifrs16 import calculate
-from my_app.models import Contract, Cost
+from my_app.models import Contract, Cashflow
 from my_app.serializers import CostSerializer
 
 
@@ -88,9 +88,9 @@ class ExampleAPIView(APIView):
         print('Calculate kwargs: ' + str(calculate_kwargs))
 
         if filter_kwargs is not None:
-            queryset = Cost.objects.filter(**filter_kwargs)
+            queryset = Cashflow.objects.filter(**filter_kwargs)
         else:
-            queryset = Cost.objects.all()
+            queryset = Cashflow.objects.all()
 
         # if not is_blank(self.request.query_params.get('groupby')):
         #     groupby_kwarg = self.request.query_params.get('groupby')

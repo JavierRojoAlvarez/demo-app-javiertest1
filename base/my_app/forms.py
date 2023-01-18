@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.forms import inlineformset_factory
 from django.forms.models import BaseInlineFormSet
 from website.settings import DATE_INPUT_FORMATS
-from .models import Cost, Entry, Transaction, ContractPayment, Contract
+from .models import Cashflow, Entry, Transaction, ContractPayment, Contract
 
 
 reg_attrs = {'class': 'form-control form-control-md rounded'}
@@ -16,11 +16,11 @@ date_attrs = {
 req_attrs = {'required': 'required'}
 
 
-class CostForm(ModelForm):
+class CashflowForm(ModelForm):
     class Meta:
-        model = Cost
+        model = Cashflow
         widgets = {
-            'cost_type': forms.Select(attrs=reg_attrs),
+            'category': forms.Select(attrs=reg_attrs),
             'building': forms.Select(attrs=reg_attrs),
             'value': forms.TextInput(attrs=reg_attrs),
             'start': forms.DateInput(attrs=reg_attrs),

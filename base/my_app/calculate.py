@@ -2,12 +2,12 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 from django_pandas.io import read_frame
-from my_app.models import Cost
+from my_app.models import Cashflow
 from buildings.models import Building
 
 
 def calculate(
-    cost_qs=Cost.objects.filter(building__id=4),
+    cost_qs=Cashflow.objects.filter(building__id=4),
     building_qs=Building.objects.all(), groupby=False
 ):
     start_time = datetime.now()

@@ -6,7 +6,7 @@ from buildings.models import Building
 from organisations.models import Organisation
 
 
-class CostType(models.Model):
+class CashflowCategory(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -16,11 +16,11 @@ class CostType(models.Model):
         verbose_name_plural = 'Cost Types'
 
 
-class Cost(models.Model):
+class Cashflow(models.Model):
     start = models.DateField()
     end = models.DateField()
-    cost_type = models.ForeignKey(
-        CostType, on_delete=models.CASCADE, default=''
+    category = models.ForeignKey(
+        CashflowCategory, on_delete=models.CASCADE, default=''
     )
     building = models.ForeignKey(
         Building, on_delete=models.CASCADE, default=''
@@ -29,7 +29,7 @@ class Cost(models.Model):
     value = models.DecimalField(decimal_places=2, max_digits=20, default=0)
 
     def __str__(self):
-        return f'{self.cost_type}:{self.start}'
+        return f'{self.category}:{self.start}'
 
 
 class AccountType(models.Model):

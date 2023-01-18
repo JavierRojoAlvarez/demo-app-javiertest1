@@ -1,8 +1,8 @@
-from my_app.models import Cost
+from my_app.models import Cashflow
 from rest_framework import serializers
 
 
 class CostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Cost
+        model = Cashflow
         fields = '__all__'
