@@ -8,7 +8,7 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    replaces = [('my_app', '0001_initial'), ('my_app', '0002_update_org_fk_references'), ('my_app', '0003_delete_old_org_tables')]
+    initial = True
 
     dependencies = [
     ]
