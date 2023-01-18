@@ -159,26 +159,6 @@ class PseudoEntry(AbstractEntry):
         verbose_name_plural = 'Pseudo Entries'
 
 
-class AssetType(models.Model):
-    name = models.CharField(max_length=50, default='')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = 'Asset Types'
-
-
-class ProfitCentre(models.Model):
-    name = models.IntegerField()
-
-    def __str__(self):
-        return f'{self.name}'
-
-    class Meta:
-        verbose_name_plural = 'Profit Centres'
-
-
 class ContractType(models.Model):
     name = models.CharField(max_length=50, default='')
 
