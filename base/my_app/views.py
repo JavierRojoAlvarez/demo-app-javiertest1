@@ -117,6 +117,7 @@ class FormsetNewMixin:
     nested_data = None
     is_update_view = False
     delete_transactions = True
+    is_contract_view = False
 
     def post(self, request):
         if self.is_update_view:
@@ -154,28 +155,36 @@ class FormsetNewMixin:
             for record in uncommitted_list:
                 print('Saving...', record)
                 record.save()
-            payment_list = [form.cleaned_data['amount'] for form in formset]
-            date_list = [form.cleaned_data['date'] for form in formset]
-            actual_list = [form.cleaned_data['actual_expected']
-                           for form in formset]
-            print('Actual list:', actual_list)
-            create_records(
-                payments=payment_list, dates=date_list, func=calculate,
-                actuals=actual_list, contract=self.object
-            )
+            if self.is_contract_view:
+                payment_list = [
+                    form.cleaned_data['amount'] for form in formset
+                ]
+                date_list = [form.cleaned_data['date'] for form in formset]
+                actual_list = [
+                    form.cleaned_data['actual_expected'] for form in formset
+                ]
+                print('Actual list:', actual_list)
+                create_records(
+                    payments=payment_list, dates=date_list, func=calculate,
+                    actuals=actual_list, contract=self.object
+                )
         else:
             self.object = form.save()
             formset.instance = self.object
             formset.save()
-            payment_list = [form.cleaned_data['amount'] for form in formset]
-            date_list = [form.cleaned_data['date'] for form in formset]
-            actual_list = [form.cleaned_data['actual_expected']
-                           for form in formset]
-            print('Actual list:', actual_list)
-            create_records(
-                payments=payment_list, dates=date_list, func=calculate,
-                actuals=actual_list, contract=self.object
-            )
+            if self.is_contract_view:
+                payment_list = [
+                    form.cleaned_data['amount'] for form in formset
+                ]
+                date_list = [form.cleaned_data['date'] for form in formset]
+                actual_list = [
+                    form.cleaned_data['actual_expected'] for form in formset
+                ]
+                print('Actual list:', actual_list)
+                create_records(
+                    payments=payment_list, dates=date_list, func=calculate,
+                    actuals=actual_list, contract=self.object
+                )
         if self.request.POST.get('next'):
             return HttpResponseRedirect(
                 self.request.POST.get('next', self.get_success_url())
