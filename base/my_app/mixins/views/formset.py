@@ -30,7 +30,6 @@ class CreateFormsetMixin:
         )
 
     def form_invalid(self, form, formset):
-        print(form.errors, formset.errors)
         return self.render_to_response(
             self.get_context_data(form=form, formset=formset)
         )
@@ -43,7 +42,6 @@ class CreateFormsetMixin:
             formset = self.formset_class(initial=self.formset_initial_data)
             formset.extra = len(self.formset_initial_data)
             context['formset'] = formset
-        print('Context delivered is:\n', context)
         return context
 
     def create_additional_records(self):
@@ -72,20 +70,16 @@ class UpdateFormsetMixin:
         uncommitted_list = []
         for form in formset:
             uncommitted_list.append(form.save(commit=False))
-        print('LIST', uncommitted_list)
         filter_dict = {formset.__class__.fk.name: formset.instance.id}
         qs_children = formset.model.objects.filter(**filter_dict)
         qs_children.delete()
-        print('Deleted queryset of children records')
         if self.delete_transactions:
             filter_dict = {'contract_id': self.object.id}
             qs_children = TransactionFormSet.model.objects.filter(
                 **filter_dict)
             qs_children.delete()
-            print('Deleted old transaction records')
         self.instances = formset.save()
         for record in uncommitted_list:
-            print('Saving...', record)
             record.save()
         self.create_additional_records()
         return HttpResponseRedirect(
@@ -93,7 +87,6 @@ class UpdateFormsetMixin:
         )
 
     def form_invalid(self, form, formset):
-        print(form.errors, formset.errors)
         return self.render_to_response(
             self.get_context_data(form=form, formset=formset)
         )
@@ -101,12 +94,10 @@ class UpdateFormsetMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.method == 'GET':
-            print('Update view...', self.object)
             context['form'] = self.form_class(instance=self.object)
             formset = self.formset_class(instance=self.object)
             formset.extra = 0
             context['formset'] = formset
-        print('Context delivered is:\n', context)
         return context
 
     def create_additional_records(self):
@@ -120,7 +111,6 @@ class Ifrs16FormsetMixin:
         actual_list = [
             instance.actual_expected for instance in self.instances
         ]
-        print('Actual list:', actual_list)
         create_ifrs16_records(
             payments=payment_list, dates=date_list, func=calculate,
             actuals=actual_list, contract=self.object
