@@ -38,12 +38,9 @@ class CreateFormsetMixin:
                 payments=payment_list, dates=date_list, func=calculate,
                 actuals=actual_list, contract=self.object
             )
-        if self.request.POST.get('next'):
-            return HttpResponseRedirect(
-                self.request.POST.get('next', self.get_success_url())
-            )
-        else:
-            return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(
+            self.request.POST.get('next', self.get_success_url())
+        )
 
     def form_invalid(self, form, formset):
         print(form.errors, formset.errors)
@@ -114,12 +111,9 @@ class UpdateFormsetMixin:
                 payments=payment_list, dates=date_list, func=calculate,
                 actuals=actual_list, contract=self.object
             )
-        if self.request.POST.get('next'):
-            return HttpResponseRedirect(
-                self.request.POST.get('next', self.get_success_url())
-            )
-        else:
-            return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(
+            self.request.POST.get('next', self.get_success_url())
+        )
 
     def form_invalid(self, form, formset):
         print(form.errors, formset.errors)
