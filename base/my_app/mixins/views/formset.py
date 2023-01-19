@@ -8,7 +8,6 @@ class CreateFormsetMixin:
     # formset_class = None
     form_initial_data = None
     formset_initial_data = None
-    delete_transactions = True
 
     def post(self, request):
         self.object = None
