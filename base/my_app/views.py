@@ -11,7 +11,7 @@ from my_app.forms import (
     TransactionForm, EntryFormSet, ContractForm, ContractPaymentFormSet
 )
 from my_app.models import Contract, ContractType, Transaction, TransactionType
-from my_app.mixins.views.formset import FormsetMixin
+from my_app.mixins.views.formset import CreateFormsetMixin, UpdateFormsetMixin
 from buildings.models import Region
 from basic.mixins.views.general import GeneralMixin
 
@@ -19,7 +19,7 @@ from basic.mixins.views.general import GeneralMixin
 today = datetime.date.today().strftime("%d/%m/%Y")
 
 
-class TransactionCreateView(FormsetMixin, GeneralMixin, CreateView):
+class TransactionCreateView(CreateFormsetMixin, GeneralMixin, CreateView):
     model = Transaction
     template_name = 'my_app/transaction/transaction-create.html'
     success_url = reverse_lazy('transaction-list')
@@ -30,7 +30,7 @@ class TransactionCreateView(FormsetMixin, GeneralMixin, CreateView):
     active_keys = ['transaction_active', 'transaction_create_active']
 
 
-class TransactionUpdateView(FormsetMixin, GeneralMixin, UpdateView):
+class TransactionUpdateView(UpdateFormsetMixin, GeneralMixin, UpdateView):
     model = Transaction
     context_object_name = 'record'
     form_class = TransactionForm
@@ -152,7 +152,7 @@ class ContractListView(GeneralMixin, ListView):
         return context
 
 
-class ContractCreateNewView(FormsetMixin, GeneralMixin, CreateView):
+class ContractCreateNewView(CreateFormsetMixin, GeneralMixin, CreateView):
     model = Contract
     template_name = 'my_app/contract/contract-create.html'
     active_keys = ['contract_active', 'contract_create_active']
@@ -164,7 +164,7 @@ class ContractCreateNewView(FormsetMixin, GeneralMixin, CreateView):
     formset_initial_data.extend(repeat({'date': today}, 4))
 
 
-class ContractUpdateView(FormsetMixin, GeneralMixin, UpdateView):
+class ContractUpdateView(UpdateFormsetMixin, GeneralMixin, UpdateView):
     model = Contract
     template_name = 'my_app/contract/contract-update.html'
     active_keys = ['contract_active']
