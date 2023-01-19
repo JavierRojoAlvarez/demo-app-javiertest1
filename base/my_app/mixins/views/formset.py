@@ -9,7 +9,6 @@ class CreateFormsetMixin:
     form_initial_data = None
     formset_initial_data = None
     nested_data = None
-    is_update_view = False
     delete_transactions = True
     is_contract_view = False
 
@@ -55,18 +54,11 @@ class CreateFormsetMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.method == 'GET':
-            if self.is_update_view:
-                print('Update view...', self.object)
-                context['form'] = self.form_class(instance=self.object)
-                formset = self.formset_class(instance=self.object)
-                formset.extra = 0
-                context['formset'] = formset
-            else:
-                context['form'] = self.form_class(
-                    initial=self.form_initial_data)
-                formset = self.formset_class(initial=self.formset_initial_data)
-                formset.extra = len(self.formset_initial_data)
-                context['formset'] = formset
+            context['form'] = self.form_class(
+                initial=self.form_initial_data)
+            formset = self.formset_class(initial=self.formset_initial_data)
+            formset.extra = len(self.formset_initial_data)
+            context['formset'] = formset
         print('Context delivered is:\n', context)
         return context
 
@@ -138,17 +130,10 @@ class UpdateFormsetMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.method == 'GET':
-            if self.is_update_view:
-                print('Update view...', self.object)
-                context['form'] = self.form_class(instance=self.object)
-                formset = self.formset_class(instance=self.object)
-                formset.extra = 0
-                context['formset'] = formset
-            else:
-                context['form'] = self.form_class(
-                    initial=self.form_initial_data)
-                formset = self.formset_class(initial=self.formset_initial_data)
-                formset.extra = len(self.formset_initial_data)
-                context['formset'] = formset
+            print('Update view...', self.object)
+            context['form'] = self.form_class(instance=self.object)
+            formset = self.formset_class(instance=self.object)
+            formset.extra = 0
+            context['formset'] = formset
         print('Context delivered is:\n', context)
         return context

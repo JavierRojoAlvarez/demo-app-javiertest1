@@ -36,7 +36,6 @@ class TransactionUpdateView(UpdateFormsetMixin, GeneralMixin, UpdateView):
     form_class = TransactionForm
     formset_class = EntryFormSet
     formset_initial_data = [{'direction': 1}, {'direction': 2}]
-    is_update_view = True
     template_name = 'my_app/transaction/transaction-update.html'
     active_keys = ['transaction_update_active']
     success_url = reverse_lazy('transaction-list')
@@ -173,7 +172,6 @@ class ContractUpdateView(UpdateFormsetMixin, GeneralMixin, UpdateView):
     formset_class = ContractPaymentFormSet
     form_initial_data = {'start': today}
     formset_initial_data = []
-    is_update_view = True
     formset_qs = True
     formset_initial_data.extend(repeat({'date': today}, 4))
 
