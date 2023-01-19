@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from my_app.ifrs16 import create_records
+from my_app.ifrs16 import create_ifrs16_records
 from my_app.calculate import calculate
 from my_app.forms import TransactionFormSet
 
@@ -34,7 +34,7 @@ class CreateFormsetMixin:
                 form.cleaned_data['actual_expected'] for form in formset
             ]
             print('Actual list:', actual_list)
-            create_records(
+            create_ifrs16_records(
                 payments=payment_list, dates=date_list, func=calculate,
                 actuals=actual_list, contract=self.object
             )
@@ -107,7 +107,7 @@ class UpdateFormsetMixin:
                 form.cleaned_data['actual_expected'] for form in formset
             ]
             print('Actual list:', actual_list)
-            create_records(
+            create_ifrs16_records(
                 payments=payment_list, dates=date_list, func=calculate,
                 actuals=actual_list, contract=self.object
             )

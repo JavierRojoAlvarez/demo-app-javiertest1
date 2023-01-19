@@ -148,7 +148,7 @@ def calculate(
         return data
 
 
-def create_records(
+def create_ifrs16_records(
     payments=None, dates=None, actuals=None, func=calculate, contract=None
 ):
     start_time = datetime.now()
