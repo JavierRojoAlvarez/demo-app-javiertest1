@@ -1,7 +1,7 @@
 from django.urls import path
 from my_app.views import (
      TransactionCreateView, TransactionListView, TransactionUpdateView,
-     ContractCreateNewView, ContractListView, ContractUpdateView,
+     ContractCreateView, ContractListView, ContractUpdateView,
      ContractDetailView, transaction_formset_view, contract_formset_view
 )
 
@@ -23,7 +23,7 @@ urlpatterns = [
           name='transaction-formset'
     ),
     path(
-          'contract/create', ContractCreateNewView.as_view(),
+          'contract/create', ContractCreateView.as_view(),
           name='contract-create'
     ),
     path(

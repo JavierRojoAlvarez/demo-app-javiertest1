@@ -152,7 +152,7 @@ class ContractListView(GeneralMixin, ListView):
         return context
 
 
-class ContractCreateNewView(CreateFormsetMixin, GeneralMixin, CreateView):
+class ContractCreateView(CreateFormsetMixin, GeneralMixin, CreateView):
     model = Contract
     template_name = 'my_app/contract/contract-create.html'
     active_keys = ['contract_active', 'contract_create_active']
