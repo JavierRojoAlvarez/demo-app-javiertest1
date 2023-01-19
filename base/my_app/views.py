@@ -18,17 +18,12 @@ from buildings.models import Region
 from basic.mixins.views.general import GeneralMixin
 
 
-today = datetime.date.today().strftime("%d/%m/%Y")
-
-
 class TransactionCreateView(CreateFormsetMixin, GeneralMixin, CreateView):
     model = Transaction
     template_name = 'my_app/transaction/transaction-create.html'
     success_url = reverse_lazy('transaction-list')
     form_class = TransactionForm
     formset_class = EntryFormSet
-    form_initial_data = {'date': today}
-    formset_initial_data = [{'direction': 1}, {'direction': 2}]
     active_keys = ['transaction_active', 'transaction_create_active']
 
 
@@ -37,7 +32,6 @@ class TransactionUpdateView(UpdateFormsetMixin, GeneralMixin, UpdateView):
     context_object_name = 'record'
     form_class = TransactionForm
     formset_class = EntryFormSet
-    formset_initial_data = [{'direction': 1}, {'direction': 2}]
     template_name = 'my_app/transaction/transaction-update.html'
     active_keys = ['transaction_update_active']
     success_url = reverse_lazy('transaction-list')
@@ -162,9 +156,6 @@ class ContractCreateView(
     success_url = reverse_lazy('contract-list')
     form_class = ContractForm
     formset_class = ContractPaymentFormSet
-    form_initial_data = {'start': today}
-    formset_initial_data = []
-    formset_initial_data.extend(repeat({'date': today}, 4))
 
 
 class ContractUpdateView(
@@ -176,10 +167,7 @@ class ContractUpdateView(
     success_url = reverse_lazy('contract-list')
     form_class = ContractForm
     formset_class = ContractPaymentFormSet
-    form_initial_data = {'start': today}
-    formset_initial_data = []
     formset_qs = True
-    formset_initial_data.extend(repeat({'date': today}, 4))
 
     def get_success_url(self):
         contract_id = self.kwargs['pk']

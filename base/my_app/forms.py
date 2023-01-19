@@ -1,3 +1,4 @@
+from datetime import datetime
 from django import forms
 from django.forms import ModelForm
 from django.forms import inlineformset_factory
@@ -15,6 +16,7 @@ date_attrs = {
     'class': 'form-control form-control-md rounded date-input', 'name': 'date'
 }
 req_attrs = {'required': 'required'}
+today = datetime.today().strftime('%d/%m/%Y')
 
 
 class CashflowForm(ModelForm):
@@ -73,13 +75,17 @@ class TransactionForm(ModelForm):
         self.initial_data = initial_data
         self.nested_data = nested_data
 
+    date = forms.DateField(
+        initial=today,
+        widget=forms.DateInput(
+            format=DATE_INPUT_FORMATS[0], attrs=date_attrs
+        ),
+    )
+
     class Meta:
         model = Transaction
         widgets = {
             'transaction_type': forms.Select(attrs=reg_attrs),
-            'date': forms.DateInput(
-                format=DATE_INPUT_FORMATS[0], attrs=date_attrs
-            ),
             'contract': forms.Select(attrs=reg_attrs),
             'period': forms.TextInput(
                 attrs={
@@ -104,13 +110,17 @@ class ContractPaymentForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.initial_data = initial_data
 
+    date = forms.DateField(
+        initial=today,
+        widget=forms.DateInput(
+            format=DATE_INPUT_FORMATS[0], attrs=date_attrs
+        ),
+    )
+
     class Meta:
         model = ContractPayment
         widgets = {
             'transaction_type': forms.Select(attrs=reg_attrs),
-            'date': forms.DateInput(
-                format=DATE_INPUT_FORMATS[0], attrs=date_attrs
-            ),
             'contract': forms.Select(attrs=reg_attrs),
             'period': forms.TextInput(
                 attrs={

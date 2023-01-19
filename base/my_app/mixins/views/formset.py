@@ -6,8 +6,6 @@ from my_app.forms import TransactionFormSet
 
 class CreateFormsetMixin:
     # formset_class = None
-    form_initial_data = None
-    formset_initial_data = None
 
     def post(self, request):
         self.object = None
@@ -35,10 +33,7 @@ class CreateFormsetMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.method == 'GET':
-            context['form'] = self.form_class(
-                initial=self.form_initial_data)
-            formset = self.formset_class(initial=self.formset_initial_data)
-            formset.extra = len(self.formset_initial_data)
+            formset = self.formset_class()
             context['formset'] = formset
         return context
 
@@ -48,8 +43,6 @@ class CreateFormsetMixin:
 
 class UpdateFormsetMixin:
     # formset_class = None
-    form_initial_data = None
-    formset_initial_data = None
     delete_transactions = True
 
     def post(self, request):
