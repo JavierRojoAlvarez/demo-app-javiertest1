@@ -10,7 +10,6 @@ class CreateFormsetMixin:
     formset_initial_data = None
     nested_data = None
     delete_transactions = True
-    is_contract_view = False
 
     def post(self, request):
         self.object = None
@@ -24,20 +23,8 @@ class CreateFormsetMixin:
     def form_valid(self, form, formset):
         self.object = form.save()
         formset.instance = self.object
-        formset.save()
-        if self.is_contract_view:
-            payment_list = [
-                form.cleaned_data['amount'] for form in formset
-            ]
-            date_list = [form.cleaned_data['date'] for form in formset]
-            actual_list = [
-                form.cleaned_data['actual_expected'] for form in formset
-            ]
-            print('Actual list:', actual_list)
-            create_ifrs16_records(
-                payments=payment_list, dates=date_list, func=calculate,
-                actuals=actual_list, contract=self.object
-            )
+        self.instances = formset.save()
+        self.create_additional_records()
         return HttpResponseRedirect(
             self.request.POST.get('next', self.get_success_url())
         )
@@ -59,6 +46,9 @@ class CreateFormsetMixin:
         print('Context delivered is:\n', context)
         return context
 
+    def create_additional_records(self):
+        pass
+
 
 class UpdateFormsetMixin:
     # formset_class = None
@@ -66,7 +56,6 @@ class UpdateFormsetMixin:
     formset_initial_data = None
     nested_data = None
     delete_transactions = True
-    is_contract_view = False
 
     def post(self, request):
         self.object = self.get_object()
@@ -94,23 +83,11 @@ class UpdateFormsetMixin:
                 **filter_dict)
             qs_children.delete()
             print('Deleted old transaction records')
-        formset.save()
+        self.instances = formset.save()
         for record in uncommitted_list:
             print('Saving...', record)
             record.save()
-        if self.is_contract_view:
-            payment_list = [
-                form.cleaned_data['amount'] for form in formset
-            ]
-            date_list = [form.cleaned_data['date'] for form in formset]
-            actual_list = [
-                form.cleaned_data['actual_expected'] for form in formset
-            ]
-            print('Actual list:', actual_list)
-            create_ifrs16_records(
-                payments=payment_list, dates=date_list, func=calculate,
-                actuals=actual_list, contract=self.object
-            )
+        self.create_additional_records()
         return HttpResponseRedirect(
             self.request.POST.get('next', self.get_success_url())
         )
@@ -131,3 +108,20 @@ class UpdateFormsetMixin:
             context['formset'] = formset
         print('Context delivered is:\n', context)
         return context
+
+    def create_additional_records(self):
+        pass
+
+
+class Ifrs16FormsetMixin:
+    def create_additional_records(self):
+        payment_list = [instance.amount for instance in self.instances]
+        date_list = [instance.date for instance in self.instances]
+        actual_list = [
+            instance.actual_expected for instance in self.instances
+        ]
+        print('Actual list:', actual_list)
+        create_ifrs16_records(
+            payments=payment_list, dates=date_list, func=calculate,
+            actuals=actual_list, contract=self.object
+        )

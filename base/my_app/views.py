@@ -11,7 +11,9 @@ from my_app.forms import (
     TransactionForm, EntryFormSet, ContractForm, ContractPaymentFormSet
 )
 from my_app.models import Contract, ContractType, Transaction, TransactionType
-from my_app.mixins.views.formset import CreateFormsetMixin, UpdateFormsetMixin
+from my_app.mixins.views.formset import (
+    CreateFormsetMixin, UpdateFormsetMixin, Ifrs16FormsetMixin
+)
 from buildings.models import Region
 from basic.mixins.views.general import GeneralMixin
 
@@ -151,7 +153,9 @@ class ContractListView(GeneralMixin, ListView):
         return context
 
 
-class ContractCreateView(CreateFormsetMixin, GeneralMixin, CreateView):
+class ContractCreateView(
+    Ifrs16FormsetMixin, CreateFormsetMixin, GeneralMixin, CreateView
+):
     model = Contract
     template_name = 'my_app/contract/contract-create.html'
     active_keys = ['contract_active', 'contract_create_active']
@@ -163,7 +167,9 @@ class ContractCreateView(CreateFormsetMixin, GeneralMixin, CreateView):
     formset_initial_data.extend(repeat({'date': today}, 4))
 
 
-class ContractUpdateView(UpdateFormsetMixin, GeneralMixin, UpdateView):
+class ContractUpdateView(
+    Ifrs16FormsetMixin, UpdateFormsetMixin, GeneralMixin, UpdateView
+):
     model = Contract
     template_name = 'my_app/contract/contract-update.html'
     active_keys = ['contract_active']
