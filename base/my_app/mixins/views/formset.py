@@ -5,7 +5,6 @@ from my_app.forms import TransactionFormSet
 
 
 class CreateFormsetMixin:
-    # formset_class = None
 
     def post(self, request):
         self.object = None
@@ -42,7 +41,6 @@ class CreateFormsetMixin:
 
 
 class UpdateFormsetMixin:
-    # formset_class = None
     delete_transactions = True
 
     def post(self, request):
