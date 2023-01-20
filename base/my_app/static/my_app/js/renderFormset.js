@@ -1,4 +1,4 @@
-import addDatePicker from '.datepicker.js';
+import addDatePicker from './datepicker.js';
 const moment = window.moment;
 const endpoint = window.endpoint;
 const amountInput = document.getElementById('id_amount');
