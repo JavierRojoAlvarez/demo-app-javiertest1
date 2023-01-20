@@ -15,3 +15,5 @@ function addDatePicker() {
 $(document).ready(
   addDatePicker
 );
+
+export default addDatePicker;
