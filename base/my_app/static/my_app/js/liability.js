@@ -2,7 +2,7 @@ const Chart = window.Chart;
 const endpoint = '/api/liability';
 const id = document.getElementById('id').value;
 
-function successfn(response) {
+function updateLineChart(response) {
   const lineCtx = document.getElementById('myLine').getContext('2d');
   const datasetArray = [];
   for (const dataset of response.datasets) {
@@ -43,4 +43,4 @@ fetch(
     },
     credentials: 'same-origin'
   }
-).then(response => response.json()).then(successfn).catch(error => console.log(error));
+).then(response => response.json()).then(updateLineChart).catch(error => console.log(error));
