@@ -36,7 +36,7 @@ console.log(
   'background: cornflowerblue; color: white; padding: 2px; border-radius:2px'
 );
 fetch(
-  endpoint+'?id='+id, {
+  `${endpoint}?id=${id}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
