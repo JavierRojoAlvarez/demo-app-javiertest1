@@ -1,6 +1,4 @@
-from itertools import repeat
 from decimal import Decimal, ROUND_HALF_UP
-import datetime
 import simplejson as json
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
