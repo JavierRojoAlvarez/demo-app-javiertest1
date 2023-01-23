@@ -1,5 +1,5 @@
+import {updateDateLimits} from './renderFormset.js';
 const $ = window.$;
-const getDateLimits = window.getDateLimits;
 
 function addDatePicker() {
   const dateInputs = $('.date-input');
@@ -9,7 +9,7 @@ function addDatePicker() {
     container,
     todayHighlight: true,
     autoclose: true,
-  }).on('changeDate', getDateLimits);
+  }).on('changeDate', updateDateLimits);
 };
 
 $(document).ready(

@@ -7,7 +7,7 @@ const formsetDiv = document.getElementById('formset');
 const tokenVal = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 const pseudoSelect = document.getElementById('id_transaction_type');
 
-function getDateLimits() {
+function updateDateLimits() {
   const startDate = document.getElementById('start-date');
   const endDate = document.getElementById('end-date');
   const dateInputs = formsetDiv.querySelectorAll('.date-input');
@@ -40,7 +40,7 @@ function getDateLimits() {
 function dateListener() {
   formsetDiv.querySelectorAll('.date-input').forEach(function(el) {
     el.addEventListener('input', function() {
-      getDateLimits();
+      updateDateLimits();
     });
   });
 };
@@ -139,7 +139,7 @@ function getFormset(addEntry, removeEntryIndex, amountDecimal, transactionTypeId
       removeRowListener();
       addDatePicker();
       dateListener();
-      getDateLimits();
+      updateDateLimits();
       console.log(
         '%c getFormset() Successful',
         'background: mediumseagreen; color: white; padding: 2px; border-radius:2px'
@@ -166,4 +166,6 @@ if (pseudoSelect) {
 removeRowListener();
 transactionAmountListener();
 dateListener();
-getDateLimits();
+updateDateLimits();
+
+export {updateDateLimits};
