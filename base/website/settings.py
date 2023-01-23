@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'buildings',
     'organisations',
     'cashflows',
+    'accounts',
     'users',
     'accounting',
     'invoice',
