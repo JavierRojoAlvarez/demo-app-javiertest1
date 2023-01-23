@@ -38,7 +38,7 @@ const pieCtx = document.getElementById('myPie').getContext('2d');
 new Chart(pieCtx, {
   type: 'pie',
   data: {
-    labels: ['GPA', 'OGD', 'BBQ'],
+    labels: ['DPA', 'OGD', 'BBQ'],
     datasets: [{
       label: 'Finance Numbers',
       backgroundColor: [

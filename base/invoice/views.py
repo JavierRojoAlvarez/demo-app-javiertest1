@@ -30,7 +30,7 @@ class ReceivedInvoiceCreateView(CreateView):
     success_url = reverse_lazy('contract-list')
 
     def is_issuer(self):
-        '''Return True if GPA is issuing invoice and False if receiving'''
+        '''Return True if user is issuing invoice and False if receiving'''
         payment = self.get_payment()
         contract_type_name = payment.contract.contract_type.name
         if contract_type_name == 'Sublease':

@@ -27,7 +27,7 @@ class ReceivedInvoice(AbstractInvoice):
         'PDF File', upload_to='received-invoices/',
         validators=(validate_is_pdf,)
     )
-    is_paid = models.BooleanField('Paid by GPA', default=False)
+    is_paid = models.BooleanField('Paid by user', default=False)
 
     def __str__(self):
         return str(self.date_received)+':'+str(self.amount)
