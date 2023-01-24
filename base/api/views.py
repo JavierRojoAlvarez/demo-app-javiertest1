@@ -10,7 +10,7 @@ from django_pandas.io import read_frame
 from basic.tracker import get_tracker_data
 from my_app.ifrs16 import calculate
 from my_app.models import Contract
-from my_app.serializers import CashflowSerializer
+from api.serializers import CashflowSerializer
 from cashflows.models import Cashflow
 
 
