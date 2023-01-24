@@ -10,7 +10,7 @@ from django_pandas.io import read_frame
 from basic.tracker import get_tracker_data
 from my_app.ifrs16 import calculate
 from my_app.models import Contract
-from my_app.serializers import CostSerializer
+from my_app.serializers import CashflowSerializer
 from cashflows.models import Cashflow
 
 
@@ -105,7 +105,7 @@ class ExampleAPIView(APIView):
         else:
             df = read_frame(queryset)
             print(df)
-            serializer = CostSerializer(queryset, many=True)
+            serializer = CashflowSerializer(queryset, many=True)
             data = serializer.data
 
         return Response(data)
