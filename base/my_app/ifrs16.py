@@ -39,7 +39,7 @@ def convert_pence_to_pounds(data_list):
     return new_data_list
 
 
-def calculate(
+def get_ifrs16_df(
     payments=random_payment_list, dates=random_date_list,
     actuals=random_actuals_list, as_records=True, base_year=2021,
     interest_rate=0.05
@@ -149,7 +149,7 @@ def calculate(
 
 
 def create_ifrs16_records(
-    payments=None, dates=None, actuals=None, func=calculate, contract=None
+    payments=None, dates=None, actuals=None, func=get_ifrs16_df, contract=None
 ):
     start_time = datetime.now()
     if payments:

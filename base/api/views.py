@@ -8,7 +8,7 @@ from oauth2_provider.contrib.rest_framework import (
 )
 from django_pandas.io import read_frame
 from basic.tracker import get_tracker_data
-from my_app.ifrs16 import calculate
+from my_app.ifrs16 import get_ifrs16_df
 from my_app.models import Contract
 from api.serializers import CashflowSerializer
 from cashflows.models import Cashflow
@@ -43,7 +43,7 @@ class LiabilityAPIView(APIView):
                 'actual_expected', flat=True
             )
             print(actuals)
-            data = calculate(
+            data = get_ifrs16_df(
                 payments=list(payments), dates=list(dates),
                 actuals=list(actuals), as_records=False
             )
@@ -101,7 +101,7 @@ class ExampleAPIView(APIView):
         print('Calculating...')
         dummy = True
         if dummy:
-            data = calculate(**calculate_kwargs)
+            data = get_ifrs16_df(**calculate_kwargs)
         else:
             df = read_frame(queryset)
             print(df)
