@@ -162,7 +162,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = secrets['STATIC_ROOT']
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = secrets['MEDIA_ROOT']
 
 LOGIN_REDIRECT_URL = '/'
 
