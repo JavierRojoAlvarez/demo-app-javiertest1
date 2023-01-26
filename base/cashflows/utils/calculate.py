@@ -59,10 +59,10 @@ def calculate(
         df = df.groupby(groupby, as_index=False).agg({'value_norm': 'sum'})
     data = df.to_dict('records')
     print(df.columns)
-    print('Rows, Columns = '+str(df.shape))
-    print('Datapoints = '+str(df.size))
+    print(f'Rows, Columns = {df.shape}')
+    print(f'Datapoints = {df.size}')
     print('Calculation Complete!')
     duration = datetime.now()-start_time
-    print('Duration: '+str(duration))
+    print(f'Duration: {duration}')
 
     return data
