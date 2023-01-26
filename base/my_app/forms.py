@@ -1,6 +1,5 @@
 from datetime import datetime
 from django import forms
-from django.forms import ModelForm
 from django.forms import inlineformset_factory
 from django.forms.models import BaseInlineFormSet
 from website.settings import DATE_INPUT_FORMATS
@@ -18,7 +17,7 @@ req_attrs = {'required': 'required'}
 today = datetime.today().strftime('%d/%m/%Y')
 
 
-class EntryForm(ModelForm):
+class EntryForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -38,7 +37,7 @@ class EntryForm(ModelForm):
         fields = list(widgets.keys())
 
 
-class EntryContractForm(ModelForm):
+class EntryContractForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -55,7 +54,7 @@ class EntryContractForm(ModelForm):
         fields = list(widgets.keys())
 
 
-class TransactionForm(ModelForm):
+class TransactionForm(forms.ModelForm):
     def __init__(self, *args, initial_data=None, nested_data=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.initial_data = initial_data
@@ -91,7 +90,7 @@ class TransactionForm(ModelForm):
         fields = list(widgets.keys())
 
 
-class ContractPaymentForm(ModelForm):
+class ContractPaymentForm(forms.ModelForm):
     def __init__(self, *args, initial_data=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.initial_data = initial_data
@@ -125,7 +124,7 @@ class ContractPaymentForm(ModelForm):
         fields = list(widgets.keys())
 
 
-class ContractForm(ModelForm):
+class ContractForm(forms.ModelForm):
     sort_by_fields = ['start', 'end', 'organisation']
     filter_fields = [
         'revenue_expenditure', 'contract_type', 'organisation', 'start', 'end',
