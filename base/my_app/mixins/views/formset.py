@@ -1,6 +1,5 @@
 from django.http import HttpResponseRedirect
 from my_app.ifrs16 import create_ifrs16_records
-from my_app.calculate import calculate
 from my_app.forms import TransactionFormSet
 
 
@@ -100,6 +99,6 @@ class Ifrs16FormsetMixin:
             instance.actual_expected for instance in self.instances
         ]
         create_ifrs16_records(
-            payments=payment_list, dates=date_list, func=calculate,
-            actuals=actual_list, contract=self.object
+            payments=payment_list, dates=date_list, actuals=actual_list,
+            contract=self.object
         )
