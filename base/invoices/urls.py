@@ -1,5 +1,5 @@
 from django.urls import path
-from invoice.views import preview_pdf, ReceivedInvoiceCreateView
+from invoices.views import preview_pdf, ReceivedInvoiceCreateView
 
 
 urlpatterns = [

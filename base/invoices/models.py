@@ -1,7 +1,7 @@
 from decimal import Decimal
 from django.db import models
 from django.core.validators import MinValueValidator
-from invoice.validators import validate_is_pdf
+from invoices.validators import validate_is_pdf
 from my_app.models import ContractPayment
 
 

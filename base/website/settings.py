@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'accounts',
     'users',
     'accounting',
-    'invoice',
+    'invoices',
     'rest_framework',
     'oauth2_provider',
     'import_export',

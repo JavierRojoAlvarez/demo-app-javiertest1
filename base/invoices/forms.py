@@ -1,8 +1,8 @@
 from django import forms
 from django.forms import ModelForm
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from invoice.models import ReceivedInvoice, IssuedInvoice
-from invoice.pdf import make_pdf_preview
+from invoices.models import ReceivedInvoice, IssuedInvoice
+from invoices.pdf import make_pdf_preview
 from website.settings import DATE_INPUT_FORMATS
 
 reg_attrs = {'class': 'form-control form-control-md rounded'}

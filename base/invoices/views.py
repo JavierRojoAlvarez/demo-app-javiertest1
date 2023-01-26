@@ -3,8 +3,8 @@ from django.http import HttpResponse, Http404
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.core.exceptions import ObjectDoesNotExist
-from invoice.forms import IssuedInvoiceForm, ReceivedInvoiceForm
-from invoice.pdf import make_pdf_preview
+from invoices.forms import IssuedInvoiceForm, ReceivedInvoiceForm
+from invoices.pdf import make_pdf_preview
 from my_app.models import (
     ContractPayment, Entry, Transaction, TransactionType
 )

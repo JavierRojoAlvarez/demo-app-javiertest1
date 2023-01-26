@@ -4,7 +4,7 @@ from decimal import Decimal
 import django.core.validators
 from django.db import migrations, models
 import django.db.models.deletion
-import invoice.validators
+import invoices.validators
 
 
 class Migration(migrations.Migration):
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             name='ReceivedInvoice',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('pdf', models.FileField(upload_to='received-invoices/', validators=[invoice.validators.validate_is_pdf], verbose_name='PDF File')),
+                ('pdf', models.FileField(upload_to='received-invoices/', validators=[invoices.validators.validate_is_pdf], verbose_name='PDF File')),
                 ('date_received', models.DateField(verbose_name='Date Received')),
                 ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=20, validators=[django.core.validators.MinValueValidator(Decimal('0.00'))])),
                 ('associated_payment', models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='my_app.contractpayment', verbose_name='Associated Payment')),
