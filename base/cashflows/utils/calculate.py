@@ -7,13 +7,13 @@ from buildings.models import Building
 
 
 def calculate(
-    cost_qs=Cashflow.objects.filter(building__id=4),
+    cashflow_qs=Cashflow.objects.filter(building__id=4),
     building_qs=Building.objects.all(), groupby=False
 ):
     start_time = datetime.now()
     print(start_time)
     print('Recalculating...')
-    cashflow_df = read_frame(cost_qs, verbose=False)
+    cashflow_df = read_frame(cashflow_qs, verbose=False)
     print(cashflow_df.shape)
     building_df = read_frame(building_qs, verbose=False)
     cashflow_df['value'] = cashflow_df['value'].astype('float')
