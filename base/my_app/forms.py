@@ -4,7 +4,6 @@ from django.forms import ModelForm
 from django.forms import inlineformset_factory
 from django.forms.models import BaseInlineFormSet
 from website.settings import DATE_INPUT_FORMATS
-from cashflows.models import Cashflow
 from .models import Entry, Transaction, ContractPayment, Contract
 
 
@@ -17,19 +16,6 @@ date_attrs = {
 }
 req_attrs = {'required': 'required'}
 today = datetime.today().strftime('%d/%m/%Y')
-
-
-class CashflowForm(ModelForm):
-    class Meta:
-        model = Cashflow
-        widgets = {
-            'category': forms.Select(attrs=reg_attrs),
-            'building': forms.Select(attrs=reg_attrs),
-            'value': forms.TextInput(attrs=reg_attrs),
-            'start': forms.DateInput(attrs=reg_attrs),
-            'end': forms.DateInput(attrs=reg_attrs),
-        }
-        fields = list(widgets.keys())
 
 
 class EntryForm(ModelForm):
