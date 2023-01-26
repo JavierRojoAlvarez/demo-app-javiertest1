@@ -13,13 +13,13 @@ def calculate(
     start_time = datetime.now()
     print(start_time)
     print('Recalculating...')
-    cost_df = read_frame(cost_qs, verbose=False)
-    print(cost_df.shape)
+    cashflow_df = read_frame(cost_qs, verbose=False)
+    print(cashflow_df.shape)
     building_df = read_frame(building_qs, verbose=False)
-    cost_df['value'] = cost_df['value'].astype('float')
+    cashflow_df['value'] = cashflow_df['value'].astype('float')
     t = np.arange('2020-04', '2046-04', 3, dtype='datetime64[M]')
     base_fy_start = 2020
-    y = np.arange(0, len(cost_df))
+    y = np.arange(0, len(cashflow_df))
     period_start = np.tile(t, len(y))
     period_end = period_start+np.timedelta64(3, 'M')-np.timedelta64(1, 'D')
     period_dur = (period_end-period_start+1).astype(int)
@@ -28,8 +28,8 @@ def calculate(
     fy_start = np.where(month != 1, year, year-1)
     time_index = fy_start-base_fy_start
     cross_index = np.repeat(y, len(t))
-    start = cost_df['start'].values.astype('datetime64[D]')
-    end = cost_df['end'].values.astype('datetime64[D]')
+    start = cashflow_df['start'].values.astype('datetime64[D]')
+    end = cashflow_df['end'].values.astype('datetime64[D]')
     start = np.repeat(start, len(t))
     end = np.repeat(end, len(t))
     span = (np.minimum(period_end, end) -
@@ -47,7 +47,7 @@ def calculate(
     df = pd.DataFrame(data=data_array, columns=column_list)
     in_date_condition = df['period_frac'] > 0
     df = df[in_date_condition]
-    df = df.merge(cost_df, left_on='cross_index', right_index=True)
+    df = df.merge(cashflow_df, left_on='cross_index', right_index=True)
     df = df.merge(building_df, left_on='building', right_index=True)
     df['fy_string'] = df['fy_start'].map(str)+"/"+(df['fy_start']+1).map(str)
     df['value_norm'] = (df['value']/4).where(~df['lump_sum'], df['value'])
