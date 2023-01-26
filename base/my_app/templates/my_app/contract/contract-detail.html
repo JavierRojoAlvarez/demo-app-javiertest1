@@ -78,8 +78,8 @@
 </div>
 	<h3>Accounting</h3>
 	<h6 class='text-muted'>IFRS16</h6>
-	{% regroup record.transaction_set.all by time_index as accounting_list %}
-	{% for time_index,transactions in accounting_list %}
+	{% regroup record.transaction_set.all by time_index as statements_list %}
+	{% for time_index,transactions in statements_list %}
 		<div class="list-group mb-4">
 		{% for transaction in transactions %}
 			{% if transaction.treatment %}

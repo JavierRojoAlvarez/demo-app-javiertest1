@@ -9,7 +9,7 @@ urlpatterns = [
     path('', include('my_app.urls')),
     path('buildings/', include('buildings.urls')),
     path('api/', include('api.urls')),
-    path('accounting/', include('accounting.urls')),
+    path('statements/', include('statements.urls')),
     path('invoice/', include('invoices.urls')),
     path('users/', include('users.urls')),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),

@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'cashflows',
     'accounts',
     'users',
-    'accounting',
+    'statements',
     'invoices',
     'rest_framework',
     'oauth2_provider',

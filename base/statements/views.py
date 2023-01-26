@@ -8,8 +8,8 @@ today = datetime.date.today().strftime("%d/%m/%Y")
 
 
 class StatementsTemplateView(GeneralMixin, TemplateView):
-    template_name = 'accounting/statements.html'
-    active_keys = ['accounting_active']
+    template_name = 'statements/statements.html'
+    active_keys = ['statements_active']
 
     def get_context_data(self, **kwargs):
         date_threshold = datetime.datetime(2022, 1, 1)
@@ -154,6 +154,6 @@ class StatementsTemplateView(GeneralMixin, TemplateView):
             'balance_sheet': balance_sheet,
             'income_statement': income_statement,
         }
-        context = {**context, **active_dict, 'accounting_active': 'active'}
+        context = {**context, **active_dict, 'statements_active': 'active'}
         print(context)
         return context

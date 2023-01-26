@@ -1,5 +1,5 @@
 from django.urls import path
-from accounting.views import StatementsTemplateView
+from statements.views import StatementsTemplateView
 
 
 urlpatterns = [
