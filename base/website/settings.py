@@ -159,7 +159,7 @@ DATE_INPUT_FORMATS = ('%d/%m/%Y', '%Y-%m-%d')
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = secrets['STATIC_ROOT']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
