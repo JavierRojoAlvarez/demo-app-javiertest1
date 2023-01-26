@@ -1,6 +1,17 @@
-# Demo App
-This is an app built to demonstrate a simple property management system.
-It is built using [Django](https://www.djangoproject.com/) web framework for the backend and (pure) HTML/CSS/JS for the front end.
+<div align="center">
+<img src="./graphics/banner.png" alt="drawing" width="250"/>
+</div>
+
+---
+
+<p align="center">
+    <em>
+    This is a simple example property management app built using Django
+    </em>
+</p>
+
+---
+
 
 ## Getting Started
 ### Clone
