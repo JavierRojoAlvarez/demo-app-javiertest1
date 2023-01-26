@@ -185,16 +185,13 @@ class BaseEntryFormset(BaseInlineFormSet):
 
     def get_form_kwargs(self, index):
         form_kwargs = super().get_form_kwargs(index)
-        try:
-            nested_data = form_kwargs['nested_data']
-            if index < len(nested_data):
-                form_kwargs['initial_data'] = nested_data[index]
-            else:
-                form_kwargs['initial_data'] = [
-                    {'direction': 1}, {'direction': 2}
-                ]
-        except Exception as exc:
-            print(exc)
+        nested_data = form_kwargs['nested_data']
+        if index < len(nested_data):
+            form_kwargs['initial_data'] = nested_data[index]
+        else:
+            form_kwargs['initial_data'] = [
+                {'direction': 1}, {'direction': 2}
+            ]
         return form_kwargs
 
     def add_fields(self, form, index):
