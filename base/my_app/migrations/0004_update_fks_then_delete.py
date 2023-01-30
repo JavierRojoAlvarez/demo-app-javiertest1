@@ -7,7 +7,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0004_copy_account_data'),
         ('my_app', '0003_alter_transactiongroup_options_alter_account_id_and_more'),
     ]
 
