@@ -8,7 +8,7 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    replaces = [('my_app', '0001_squash_1674050134'), ('my_app', '0002_cashflow_cashflowcategory_and_more'), ('my_app', '0003_alter_transactiongroup_options_alter_account_id_and_more'), ('my_app', '0004_update_fks_then_delete')]
+    initial = True
 
     dependencies = [
     ]
