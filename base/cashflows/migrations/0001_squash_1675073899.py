@@ -6,7 +6,7 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    replaces = [('cashflows', '0001_initial'), ('cashflows', '0002_copy_cashflow_data')]
+    initial = True
 
     dependencies = [
     ]
