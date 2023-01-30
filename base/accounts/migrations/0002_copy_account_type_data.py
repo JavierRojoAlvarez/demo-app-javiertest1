@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 INSERT INTO my_app_accounttype
                 SELECT * FROM accounts_accounttype;
                 '''
-            )
+            ),
+            elidable=True
         ),
     ]

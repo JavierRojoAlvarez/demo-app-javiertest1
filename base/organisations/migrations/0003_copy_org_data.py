@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
                 INSERT INTO my_app_organisation
                 SELECT * FROM organisations_organisation;
                 '''
-            )
+            ), elidable=True
         )
     ]

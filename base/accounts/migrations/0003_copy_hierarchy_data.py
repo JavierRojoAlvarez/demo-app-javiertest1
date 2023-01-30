@@ -20,7 +20,8 @@ class Migration(migrations.Migration):
                 INSERT INTO my_app_hierarchy1
                 SELECT * FROM accounts_hierarchy1;
                 '''
-            )
+            ),
+            elidable=True
         ),
         migrations.RunSQL(
             '''
@@ -32,7 +33,8 @@ class Migration(migrations.Migration):
                 INSERT INTO my_app_hierarchy2
                 SELECT * FROM accounts_hierarchy2;
                 '''
-            )
+            ),
+            elidable=True
         ),
         migrations.RunSQL(
             '''
@@ -44,7 +46,8 @@ class Migration(migrations.Migration):
                 INSERT INTO my_app_hierarchy3
                 SELECT * FROM accounts_hierarchy3;
                 '''
-            )
+            ),
+            elidable=True
         ),
         migrations.RunSQL(
             '''
@@ -56,6 +59,7 @@ class Migration(migrations.Migration):
                 INSERT INTO my_app_hierarchy4
                 SELECT * FROM accounts_hierarchy4;
                 '''
-            )
+            ),
+            elidable=True
         ),
     ]

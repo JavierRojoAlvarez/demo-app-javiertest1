@@ -25,6 +25,7 @@ class Migration(migrations.Migration):
                 SELECT id, number, description, is_live, hierarchy4_id,
                 account_type_id FROM my_app_account
                 '''
-            )
+            ),
+            elidable=True
         )
     ]

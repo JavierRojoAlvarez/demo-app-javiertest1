@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 INSERT INTO my_app_cashflowcategory
                 SELECT * FROM cashflows_cashflowcategory;
                 '''
-            )
+            ), elidable=True
         ),
         migrations.RunSQL(
             '''
@@ -32,6 +32,6 @@ class Migration(migrations.Migration):
                 INSERT INTO my_app_cashflow
                 SELECT * FROM cashflows_cashflow;
                 '''
-            )
+            ), elidable=True
         )
     ]

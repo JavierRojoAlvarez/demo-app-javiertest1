@@ -16,5 +16,5 @@ class Migration(migrations.Migration):
         """, reverse_sql="""
             INSERT INTO my_app_region
             SELECT * FROM buildings_region;
-        """)
+        """, elidable=True)
     ]
