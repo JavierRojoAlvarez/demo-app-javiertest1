@@ -6,7 +6,7 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    replaces = [('buildings', '0001_initial'), ('buildings', '0002_copy_region_data'), ('buildings', '0003_copy_building_data')]
+    initial = True
 
     dependencies = [
     ]

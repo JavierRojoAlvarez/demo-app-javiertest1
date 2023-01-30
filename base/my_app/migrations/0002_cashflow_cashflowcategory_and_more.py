@@ -7,7 +7,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('buildings', '0003_copy_building_data'),
         ('my_app', '0001_squash_1674050134'),
     ]
 

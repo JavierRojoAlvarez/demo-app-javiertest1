@@ -8,10 +8,6 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('buildings', '0003_copy_building_data'),
-    ]
-
     operations = [
         migrations.CreateModel(
             name='CashflowCategory',
