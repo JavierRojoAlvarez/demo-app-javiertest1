@@ -11,6 +11,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('organisations', '0001_squash_1675074532'),
     ]
 
     operations = [

@@ -10,6 +10,7 @@ import invoices.validators
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('my_app', '0001_squash_1675076174'),
     ]
 
     operations = [
